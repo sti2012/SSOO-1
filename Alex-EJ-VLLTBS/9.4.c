@@ -1,4 +1,4 @@
-//Sin hacer
+// Sin hacer
 
 /* Ejercicio 9.4:
    Programa quinielístico: codificar un programa que calcule todas las
@@ -29,9 +29,6 @@
      else...
 
 */
-
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
