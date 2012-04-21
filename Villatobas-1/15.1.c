@@ -1,6 +1,3 @@
-// Funciona, pero
-// No se como incluir un #define en printf.
-
 /* Ejercicio 15.1.  (hipotenusa.c)
       La función hypot tiene el siguiente prototipo:
       double hypot(double x, double y);
@@ -10,23 +7,21 @@
       valores de los catetos: (3,4), (7.1, 1) y (5,5).
 */
 
-#include <math.h>
 #include <stdio.h>
+#include <math.h>
 
-/*
-#define CATETOS1 '(3 , 4)'
-#define CATETOS2 '(7.1 , 1)'
-#define CATETOS3 '(5 , 5)'
-*/
+#define CATETOS1 "(3,4)"
+#define CATETOS2 "(7.1,1)"
+#define CATETOS3 "(5,5)"
 
 double hypot(double x, double y)
 {
    double resultado;
-   double xx, yy;
+   double xx, yy, zz;
    double exp2 = 2;
    xx = pow(x, exp2);
    yy = pow(y, exp2);
-   double zz = xx + yy;
+   zz = xx + yy;
    resultado = sqrt(zz);
 
    //resultado = double sqrt(double pow(x,2) + double pow(y,2));
@@ -49,8 +44,9 @@ int main()
    result1 = hypot(x1, y1);
    result2 = hypot(x2, y2);
    result3 = hypot(x3, y3);
-   printf("La hipotenusa de un cateto de lados (%.1lf , %.1lf) es %lf\n", x1, y1, result1);
-   printf("La hipotenusa de un cateto de lados (%.1lf , %.1lf) es %lf\n", x2, y2, result2);
-   printf("La hipotenusa de un cateto de lados (%.1lf , %.1lf) es %lf\n", x3, y3, result3);
+   printf("La hipotenusa de un cateto de lados %s es %lf\n", CATETOS1, result1);
+   printf("La hipotenusa de un cateto de lados %s es %lf\n", CATETOS2, result2);
+   printf("La hipotenusa de un cateto de lados %s es %lf\n", CATETOS3, result3);
+   system("pause");
    return 0;
 }
