@@ -1,29 +1,40 @@
-// No compila.
+/*
+16. Declarar un array llamado conciencia de 100 elementos del tipo char.
+inicializalo con el mensaje “No faltaré sin causa justificada a clase”. Realizar
+la impresion del mismo continuamente y de la siguiente forma:
+
+N
+No
+No f
+No fa
+...
+*/
 
 #include <stdio.h>
-#include <string.h>
 
 int main()
 {
-	int i=0;
-	char cad[];
-	char cadinv[];
-	int lenght, mitad;
-
-	printf("Detector de palindromos.\nIntroduce una palabra: ");
-//	scanf("%c", &cad);
-	gets(cad);
-	lenght = strlen(cad);
-	mitad = lenght/2;
-	for(; i<mitad; i++)
+	int contador=0, max=1;
+	char conciencia[100] = {"No faltare sin causa justificada a clase"};
+//	char conciencia[100];
+//	printf("Escribe una frase\n");
+//	fgets(conciencia,100,stdin);
+	int lenght= strlen(conciencia);
+	do
 	{
-		cadinv[i] = cad[lenght-i];
-	}
-//	printf("%s %s\n", cadinv, cad);
-	if(cad = cadinv)
-		printf("Si es un palindromo\n");
-	else 
-		printf("No es un palindromo\n");
+		if (max<lenght)
+		{
+			for (;contador<max;contador++)
+			{
+				printf("%c",conciencia[contador]);
+			}
+			max++;
+			printf("\n");
+			contador=0;
+		}
+		else
+			max=0;
+	}while(1);
 
 	system("pause");
 	return 0;

@@ -1,3 +1,8 @@
+/*
+Realiza un programa que nos muestre la diferencia entre el operador
+postincremento y preincremento.
+*/
+
 #include <stdio.h>
 
 int main () 

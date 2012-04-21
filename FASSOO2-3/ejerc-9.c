@@ -1,3 +1,8 @@
+/*
+	Escribe en la pantalla del ordenador mediante un programa en lenguaje C
+	y utilizando el bucle while “No faltaré sin causa justificada a clase”.
+*/
+
 #include <stdio.h>
 
 int main()
