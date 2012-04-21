@@ -17,4 +17,5 @@ int main()
 
       printf("La suma de los primeros %d numeros es %d \n", LIMITE, suma);
       system("pause");
+      return 0;
 }

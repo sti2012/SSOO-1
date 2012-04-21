@@ -15,11 +15,11 @@
 
 int main()
 {
-      char c;
+	char c;
 
-      c = '\n';
-      printf("El caracter es %c \n", c);
-      c = 10;
-      printf("El caracter es %c \n", c);
-      system("pause");
+	c = '\n';
+	printf("El caracter es %c \n", c);
+	c = 10;
+	printf("El caracter es %c \n", c);
+	system("pause");
 }

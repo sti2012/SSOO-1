@@ -9,17 +9,18 @@
 
 int main()
 {
-      char h,o,l,a;
+	char h,o,l,a;
 
-      h = 'H';
-      printf("%c", h);
-      o = 'o';
-      printf("%c", o);
-      l = 'l';
-      printf("%c", l);
-      a = 'a';
-      printf("%c", a);
+	h = 'H';
+	printf("%c", h);
+	o = 'o';
+	printf("%c", o);
+	l = 'l';
+	printf("%c", l);
+	a = 'a';
+	printf("%c", a);
 
-      printf("\n");
-      system("pause");
+	printf("\n");
+	system("pause");
+	return 0;
 }

@@ -9,19 +9,19 @@
 
 int main()
 {
-    int numero;
-    int contador;
+	int numero;
+	int contador;
 
-    contador = 0;
-    printf("Introduce numeros. '0' para terminar:\n");
-    do
-    {
-      scanf("\n%d", &numero);
-      contador = contador + 1;
-    }
-    while(numero != 0);
-    contador = contador - 1;
-    printf("\nNumeros introducidos (sin contar '0'): %d \n", contador);
+	contador = 0;
+	printf("Introduce numeros. '0' para terminar:\n");
+	do
+	{
+		scanf("\n%d", &numero);
+		contador = contador + 1;
+	}
+	while(numero != 0);
+	contador = contador - 1;
+	printf("\nNumeros introducidos (sin contar '0'): %d \n", contador);
 
-    system("pause");
+	system("pause");
 }

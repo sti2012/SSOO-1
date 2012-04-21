@@ -9,19 +9,19 @@
 
 int main()
 {
-   int numero;
-   do
-   {
-      printf("Introduce un numero: ");
-      scanf("%d", &numero);
-      if (numero % 2 == 0)
-      {
-         printf("\nEl numero %d es: Par\n", numero);
-      }
-      else if (numero % 2 != 0)
-      {
-         printf("\nEl numero %d es: Impar\n", numero);
-      }
-   }while(numero != 0);
-   system("pause");
+	int numero;
+	do
+	{
+		printf("Introduce un numero: ");
+		scanf("%d", &numero);
+		if (numero % 2 == 0)
+	{
+		printf("\nEl numero %d es: Par\n", numero);
+	}
+	else if (numero % 2 != 0)
+	{
+		printf("\nEl numero %d es: Impar\n", numero);
+	}
+	}while(numero != 0);
+	system("pause");
 }
