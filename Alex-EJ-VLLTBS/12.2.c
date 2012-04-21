@@ -1,7 +1,8 @@
-/* Ejercicio 12.2:  (parImpar.c)
-   Crea un programa que pida números por consola y para cada número muestre un
-   mensaje diciendo si el número es par o es impar. El programa terminará cuando
-   el usuario introduzca el cero.
+/*
+	Ejercicio 12.2:  (parImpar.c)
+	Crea un programa que pida números por consola y para cada número muestre un
+	mensaje diciendo si el número es par o es impar. El programa terminará cuando
+	el usuario introduzca el cero.
 */
 
 #include <stdio.h>
@@ -24,4 +25,5 @@ int main()
 	}
 	}while(numero != 0);
 	system("pause");
+	return 0;
 }

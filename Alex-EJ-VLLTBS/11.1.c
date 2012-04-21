@@ -1,5 +1,6 @@
-/* Ejercicio 11.1:
-    Haz un programa que muestre solo las letras mayúsculas de la Z a la A.
+/* 
+	Ejercicio 11.1:
+	Haz un programa que muestre solo las letras mayúsculas de la Z a la A.
 */
 
 #include <stdio.h>
@@ -10,12 +11,12 @@
 
 int main()
 {
-      char caracter;
+	char caracter;
 
-      for (caracter = CHAR_FINAL; caracter >= CHAR_INICIO; caracter--)
-            printf("%c", caracter);
+	for (caracter = CHAR_FINAL; caracter >= CHAR_INICIO; caracter--)
+		printf("%c", caracter);
 
-      printf("\n");
-      system("pause");
-      return 0;
+	printf("\n");
+	system("pause");
+	return 0;
 }

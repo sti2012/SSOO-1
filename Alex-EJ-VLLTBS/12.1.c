@@ -1,7 +1,8 @@
-/*  Ejercicio 12.1:  (cuentaNumeros.c)
-    Haz un programa que pida que el usuario introduzca números hasta que éste
-    introduzca el número 0. Cuando introduzca cero, el programa mostrará cuántos
-    números se han introducido, sin contar el cero, y terminará.
+/*
+	Ejercicio 12.1:  (cuentaNumeros.c)
+	Haz un programa que pida que el usuario introduzca números hasta que éste
+	introduzca el número 0. Cuando introduzca cero, el programa mostrará cuántos
+	números se han introducido, sin contar el cero, y terminará.
 */
     
 #include <stdio.h>
@@ -24,4 +25,5 @@ int main()
 	printf("\nNumeros introducidos (sin contar '0'): %d \n", contador);
 
 	system("pause");
+	return 0;
 }
