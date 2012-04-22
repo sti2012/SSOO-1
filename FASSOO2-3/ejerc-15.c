@@ -1,7 +1,7 @@
 /*
-Realiza el programa de una calculadora que nos este calculando
-operaciones aritméticas de dos números y nos pida la operación a realizar
-(incluye algún tipo de desplazamiento de bits) (0 para salir).
+	Realiza el programa de una calculadora que nos este calculando
+	operaciones aritméticas de dos números y nos pida la operación a realizar
+	(incluye algún tipo de desplazamiento de bits) (0 para salir).
 */
 
 #include <stdio.h>

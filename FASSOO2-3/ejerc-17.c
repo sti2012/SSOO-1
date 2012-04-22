@@ -1,13 +1,13 @@
 /*
-16. Declarar un array llamado conciencia de 100 elementos del tipo char.
-inicializalo con el mensaje “No faltaré sin causa justificada a clase”. Realizar
-la impresion del mismo continuamente y de la siguiente forma:
+	16. Declarar un array llamado conciencia de 100 elementos del tipo char.
+	inicializalo con el mensaje “No faltaré sin causa justificada a clase”. Realizar
+	la impresion del mismo continuamente y de la siguiente forma:
 
-N
-No
-No f
-No fa
-...
+	N
+	No
+	No f
+	No fa
+	...
 */
 
 #include <stdio.h>
