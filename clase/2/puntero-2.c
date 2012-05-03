@@ -9,14 +9,15 @@ int main()
 	char *c=&saludo[0];
 
 	printf("SALUDAME\n");
-	//scanf("%[^\n]", &saludo);
+	//scanf("%[^\n]s", &saludo);
 	fgets(saludo,20,stdin);
 	printf("%s\n", saludo);
 	lenght = strlen(saludo);
 	for (x = 0; x < lenght; ++x)
 	{
 		//*c=&saludo[x];
-		printf("%p\n", *c+x);
+		//printf("%p\n", *c+x);
+		printf("%p\n", *(c+x));
 	}
 	return 0;
 }
