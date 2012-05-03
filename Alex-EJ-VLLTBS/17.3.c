@@ -1,47 +1,34 @@
 /* Ejercicio 17.3
-    Programa que lee 15 valores enteros e imprime un listado con los números
-    que son mayores que el último.
+    Programa que lee 15 valores enteros e imprime un listado con los nÃºmeros
+    que son mayores que el Ãºltimo.
 */
 
-/* Programa 17: matrices de una dimensión: arrays
-  (vectores, tablas unidimensionales ) en C.
-
-   Para trabajar con conjuntos de variables del mismo tipo, que se
-   referenciarán mediante un nombre y un índice.
-
-   En este programa trabajaremos con arrays de números.
-*/
-
-#include<stdio.h>
-
-/* Declaración de un array:
-  tipo nombre[tamaño];
-*/
+#include <stdio.h>
 
 int main()
 {
-   /* arrays de números */
-   float notas[5];
-   float media, total;
-   int i;
-
-   /* asignamos valores */
-   notas[0] = 5.5;
-   notas[1] = 3;
-   notas[2] = 7;
-   notas[3] = 9.5;
-   notas[4] = 6;
-
-
-   total = 0; /* inicializamos acumulador */
-   /* calculamos la nota media */
-   for (i=0; i < 5; i++)
+   unsigned int numero[15]; 
+   unsigned int otronumero[15];
+   int i,j,valor,max;
+   for (i=0; i<15; i++)
    {
-     total = total + notas[i];
+      printf("Introduce el numero natural %d: ",i);
+      scanf("%u",&numero[i]);
    }
-   media = total / 5;
-
-   printf("La nota media es: %f \n", media);
-
-   system("pause");
+   for (j=0; j<15; j++)
+   {
+      max=numero[0];
+      valor=0;
+      for (i=1; i<15; i++)
+      if (numero[i]>max)
+      {
+         max=numero[i];
+         valor=i;
+      }
+      otronumero[j]=max;
+      numero[valor]=0;
+   }
+      for (i=0; i<15; i++)
+      printf("El elemento ordenado %d es %u\n",i,otronumero[i]);
+      return 0;
 }
