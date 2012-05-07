@@ -1,0 +1,46 @@
+/* 
+ * Programa:    prog12_07
+ * Autores:     Jesús Carretero Pérez, 
+ *              Félix García Carballeira, 
+ *              Javier Fernandez Muñoz, 
+ *              Alejandro Calderón Mateos
+ * Fecha:       06-2001
+ * Descripción: Ejemplo del Capítulo 12:
+ *              Programa que copia un archivo en otro usando streams.
+ */
+
+#include <stdio.h>
+
+int main(void)
+{
+   FILE *fent;
+   FILE *fsal;
+   char car;
+
+    /* Apertura del archivo de entrada */
+    fent = fopen("./entrada.txt", "r");
+    if (fent == NULL)
+    {
+       fprintf(stderr, "Error abriendo entrada.txt \n");
+       return(0);
+    }
+
+    /* Apertura, con creación si no existe, del archivo de salida */
+    fsal = fopen("./salida.txt", "w");
+    if (fsal == NULL)
+    {
+       fprintf(stderr, "Error creando salida.txt \n");
+       fclose(fent);
+       return(0);
+    }
+
+    /* Bucle de lectura y escritura */
+    while (fscanf(fent, "%c", &car) != EOF)
+       fprintf(fsal, "%c", car);
+
+    /* Cierre de los streamsde entrada y de salida */
+    fclose(fent);
+    fclose(fsal);
+    return(0);
+}
+
