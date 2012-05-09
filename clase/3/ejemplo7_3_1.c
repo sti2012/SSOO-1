@@ -20,7 +20,8 @@ int main (){
     } // Comprueba si el sistema nos ha dado memoria
 
     printf("Introduzca la coordenada x del primer punto: ");
-    scanf("%f", &(puntoA->x));
+    scanf("%f", &(puntoA->x)); //Operador flecha
+    //scanf("%f",&(Punto.puntoA.x)
     printf("Introduzca la coordenada y del primer punto: ");
     scanf("%f", &(puntoA->y));
     printf("Introduzca la coordenada z del primer punto: ");

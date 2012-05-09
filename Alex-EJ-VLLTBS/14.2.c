@@ -38,7 +38,7 @@ int primo(int x)
 	}
 }
 
-int main()
+int main((int argc, char const *argv[])
 {
 	int resultado=2;
 	int numero;
