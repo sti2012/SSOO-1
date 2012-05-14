@@ -1,0 +1,805 @@
+Program : Program for video shop data base. 
+--------------------------------------------------------------------------------
+
+/*
+Description: Its a program for video shop data base . 
+It has 30 movies of english type. 
+It stores the full data of a person 
+using random filing.it can be used invideo selling shops. 
+the steps used in it are self explainatory. 
+*/
+ /******************************************************
+Project of 
+software of movie shop(data base) 
+made by 
+pc zarrar ahmad 
+pc hammad hafeez 
+NUST 
+BE TELECOM ENGG 
+
+**********************************************************/ 
+#include<iostream.h> 
+#include<conio.h> 
+#include<stdio.h> 
+#include<dos.h> 
+#include<stdlib.h> 
+#include<string.h> 
+#include<time.h> 
+#include<fstream.h> 
+#include<graphics.h> 
+#include<math.h> //header files 
+struct videoshop 
+{ 
+char name[35]; 
+int id; 
+char type[20]; 
+}film[30]; 
+struct customer 
+{ 
+char status[15]; 
+char names[25]; 
+char tel[9]; //variable declaration 
+char address[90]; //in terms of structures 
+}person[20]; 
+
+struct person 
+{ 
+char nam [20]; 
+char tele [20]; 
+char plc [20]; 
+int f_id ; 
+char flm [20]; //for main data 
+char f_tp [20]; 
+char dte [20]; 
+char tme [20]; 
+char stat [20]; 
+char stat1 [20]; 
+}p[30]; 
+struct sport 
+{ 
+int check; 
+char c_nam[20]; 
+char r_d [20]; 
+char r_t [20]; //for return movie 
+}d[30]; 
+struct final 
+{ 
+int arr ; 
+char c_n[20]; 
+char date[20]; 
+char time [20]; 
+}per[30]; 
+
+
+char op,status2[15]="not returned"; 
+char idate[9];char itime[9],rdate[9],rtime[9]; 
+char status1[15]="returned"; //variable declaration 
+int idno[60],count[30],j=0; 
+int c_no[20]; 
+int che=0; 
+void s_customer_no() //function of search by customer no 
+{ 
+clrscr(); 
+ifstream infile; 
+infile.open("file.txt",ios::binary); //opens a file and reads 
+infile.seekg(0,ios::end); 
+int n= (int)infile.tellg()/ sizeof(person); 
+cout<<"there are "<<n<<" customers database\n"; 
+int key; 
+cout<<"enter the customer no u want to search(1 to "<<n<<") : "; 
+cin>>key; 
+int c1,c2; 
+c1=0,c2=0; 
+for (int j=0;j<n;j++) 
+{ 
+if(j+1==key) 
+{ 
+c1=1,c2=100; 
+cout<<"\n Customer No : "<<j+1; 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(j*sizeof(person)); 
+infile.read((char*)&p[j],sizeof (person)); 
+cout<<"\n Customers Name : "<<p[j].nam; 
+cout<<"\n Telephone No : "<<p[j].tele; 
+cout<<"\n Address : "<<p[j].plc; 
+cout<<"\n Film id : "<<p[j].f_id; 
+cout<<"\n Film name : "<<p[j].flm; 
+cout<<"\n Film type : "<<p[j].f_tp; 
+cout<<"\n Issue date : "<<p[j].dte; 
+cout<<"\n Issue time : "<<p[j].tme; 
+int l1=0,l2=0; 
+ifstream in; 
+in.open("fold.txt",ios::binary); 
+in.seekg(0,ios::end); 
+int s=(int)in.tellg()/ sizeof(sport); 
+for (int l=0;l<s;l++) 
+{ ifstream in; 
+in.open("fold.txt",ios::binary); 
+in.seekg(l*sizeof(sport)); 
+in.read((char*)&d[l],sizeof (sport)); 
+if(((d[l].check-1)==j) &&strcmp(d[l].c_nam,p[j].nam)==0) 
+{ 
+cout<<"\n Film status : "<<p[j].stat1; 
+cout<<"\n Return Date : "<<d[l].r_d; 
+cout<<"\n Return Time : "<<d[l].r_t; 
+l1=2;l2=4; 
+break; 
+} 
+} 
+if(l1==l2) 
+cout<<"\n Film status : "<<p[j].stat; 
+cout<<"\n search ends"<<endl; 
+cout<<endl; 
+getch(); 
+} 
+} 
+if(c1==c2) 
+cout<<"customer no not in data"<<endl; 
+cout<<"press any key to return to main menu"<<endl; 
+getch(); 
+} 
+void B_video() // gives the business of movies 
+{ 
+clrscr(); 
+int vidno; 
+cout<<"\nEach video carries a worth of Rs 20 "<<endl; 
+cout<<"\n\tEnter the ID # of the video (1-30)"; 
+cin>>vidno; 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(0,ios::end); 
+int z= (int)infile.tellg()/ sizeof(person); 
+int k=0,max=0; 
+for (int j=0;j<z;j++) 
+{ 
+ifstream infile; 
+infile.open("file.txt",ios::binary); //reads the data from a given file 
+infile.seekg(j*sizeof(person)); 
+infile.read((char*)&p[j],sizeof (person)); 
+if(strcmp(film[vidno-1].name,p[j].flm)==0) 
+{ 
+k++; 
+} 
+} 
+cout<<"\n\tThe film "<<film[vidno-1].name<<" of type "<< \
+film[vidno-1].type<<" has got business of rupees "<< k*20;sleep(1); 
+} 
+void R_video() // function for returning a movie 
+{ 
+clrscr(); 
+int j=0; 
+int cid; 
+char ch; 
+char cnam[20]; 
+fflush(stdin); 
+cout<<"\n\nEnter customer no : "; 
+cin>>cid; // inputs customer data 
+cout<<"\n\nEnter the customers name : "; 
+gets(cnam); 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(0,ios::end); 
+int n= (int)infile.tellg()/ sizeof(person); //reads from specified file 
+ofstream out; 
+out.open("fold.txt",ios::app|ios::binary); 
+ifstream in; 
+in.open("fold.txt",ios::binary); 
+in.seekg(0,ios::end); 
+int s=(int)in.tellg()/ sizeof(sport); 
+if(s>0) 
+{ 
+for (int l=0;l<s;l++) 
+{ 
+ifstream in; 
+in.open("fold.txt",ios::binary); 
+in.seekg(l*sizeof(sport)); 
+in.read((char*)&d[l],sizeof (sport)); 
+if(strcmp(d[l].c_nam,cnam)==0&&(cid==d[l].check)) 
+{ 
+cout<<"Already Entered "<<endl; 
+cout<<"Press Any Key TO Return TO Main Menu "<<endl; 
+getch(); 
+goto k; 
+} 
+} 
+} 
+for (;j<n;j++) 
+{ 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(j*sizeof(person)); 
+infile.read((char*)&p[j],sizeof (person)); 
+if(strcmp(p[j].nam,cnam)==0&&(cid==j+1)) 
+goto w; 
+else 
+{ 
+if(j==(n-1)) 
+{ 
+cout<<"Customer Not In Data"<<endl; 
+cout<<"Press Any Key TO Return TO Main Menu "<<endl; 
+getch(); 
+goto k; 
+} 
+else 
+continue; 
+} 
+
+} 
+w: 
+d[che].check =cid; 
+strcpy(d[che].c_nam,cnam); 
+_strdate(rdate);_strtime(rtime); 
+strcpy(d[che].r_d,rdate); 
+strcpy(d[che].r_t,rtime); 
+out.write((char*)&d[che],sizeof(sport));
+// writes the data onto the given file 
+che++; 
+cout<<"Your Film Has Been Returned:"<<endl; 
+cout<<"Press Any Key To Return To Main Menu"<<endl; 
+getch(); 
+k: 
+} 
+void V_data() // function for viewing the data base 
+{ 
+clrscr(); 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(0,ios::end); 
+int n= (int)infile.tellg()/ sizeof(person); 
+cout<<"there are "<<n<<" customers database\n"; 
+for (int j=0;j<n;j++) 
+{ 
+cout<<"\n Customer no : "<<j+1; 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+// reads the saved data from the given file 
+infile.seekg(j*sizeof(person)); 
+infile.read((char*)&p[j],sizeof (person)); 
+cout<<"\n Customers name : "<<p[j].nam; 
+cout<<"\n Telephone no : "<<p[j].tele; 
+cout<<"\n Address : "<<p[j].plc; 
+cout<<"\n Film id : "<<p[j].f_id; 
+cout<<"\n Film name : "<<p[j].flm; 
+cout<<"\n Film type : "<<p[j].f_tp; 
+cout<<"\n Issue date : "<<p[j].dte; 
+cout<<"\n Issue time : "<<p[j].tme; 
+int l1=0,l2=0; 
+ifstream in; 
+in.open("fold.txt",ios::binary); 
+in.seekg(0,ios::end); 
+int s=(int)in.tellg()/ sizeof(sport); 
+for (int l=0;l<s;l++) 
+{ 
+ifstream in; 
+in.open("fold.txt",ios::binary); 
+in.seekg(l*sizeof(sport)); 
+in.read((char*)&d[l],sizeof (sport)); 
+
+if(((d[l].check-1)==j) &&strcmp(d[l].c_nam,p[j].nam)==0) 
+{ 
+cout<<"\n Film status : "<<p[j].stat1; 
+cout<<"\n Return Date : "<<d[l].r_d; 
+cout<<"\n Return Time : "<<d[l].r_t; 
+l1=2;l2=4; 
+break; 
+} 
+} 
+if(l1==l2) 
+cout<<"\n Film status : "<<p[j].stat; 
+cout<<endl; 
+cout<<"\nPress any key to see next data"<<endl; 
+getch(); 
+} 
+cout<<"\nThere is no more data to show"<<endl; 
+cout<<"press any key to return to main menu"<<endl; 
+getch(); 
+} 
+void main(void) //main function 
+{ 
+int i; 
+clrscr(); 
+int x=50, y=10, b=600, c=340; 
+int gdriver = EGA, gmode = EGAHI; 
+initgraph(&gdriver, &gmode, "\\borlandc\\bgi"); 
+int dly=110,dly1=40;//110 40 
+for ( i = 0; i < 200; i+=2 ) 
+{ // graphics output 
+setcolor(i); 
+circle(300,i,200-i); 
+delay(dly1); 
+} 
+for ( i = 0; i < 220; i+=2 ) 
+{ 
+setcolor(i); 
+circle(300,i+200,i); 
+delay(dly1); 
+} 
+clrscr(); 
+
+for ( i=1;i<=10;i++) 
+{if(i==7) 
+continue; 
+else 
+{ 
+setcolor(i); 
+settextstyle( DEFAULT_FONT, HORIZ_DIR, i); 
+moveto(40,120); 
+outtext("PROJECT"); //blink 
+delay(dly); 
+clrscr(); 
+} 
+} 
+for ( i=1;i<7;i++) 
+{ 
+setcolor(i); 
+settextstyle( DEFAULT_FONT, HORIZ_DIR, i); 
+moveto(160,150); 
+outtext("OF C++"); 
+delay(dly); 
+clrscr(); 
+} 
+for ( i=3;i<=9;i++) 
+{if(i==7) 
+continue; 
+else 
+{ 
+setcolor(i); 
+settextstyle( TRIPLEX_FONT, HORIZ_DIR, i); 
+moveto(40,120); 
+outtext("SUBMITTED"); 
+delay(dly); 
+clrscr(); 
+} 
+} 
+for ( i=1;i<=10;i++) 
+{if(i==7) 
+continue; 
+else 
+{ 
+setcolor(i); 
+settextstyle( DEFAULT_FONT, HORIZ_DIR, i); 
+moveto(230,160); 
+outtext("BY"); 
+delay(dly); 
+clrscr(); 
+} 
+} 
+
+for ( i=1;i<=5;i++) 
+{ 
+setcolor(i+7); 
+settextstyle( DEFAULT_FONT, HORIZ_DIR, i); 
+moveto(10,120); 
+outtext("PC ZARRAR AHMAD"); 
+delay(i*dly); 
+clrscr(); 
+} 
+
+for ( i=1;i<=4;i++) 
+{ 
+setcolor(i); 
+settextstyle( DEFAULT_FONT, HORIZ_DIR, i); 
+moveto(50,120); 
+outtext("PC HAMMAD HAFEEZ"); 
+delay(i*dly); 
+clrscr(); 
+} 
+for ( i=1;i<=5;i++) 
+{ 
+setcolor(i); 
+settextstyle( DEFAULT_FONT, HORIZ_DIR, i); 
+moveto(40,120); 
+outtext("NUST"); 
+delay(i*dly); 
+clrscr(); 
+} 
+for(i=1;i<=10;i++) 
+{ 
+setcolor(5); 
+rectangle(x, y+3, b, c); 
+clrscr(); 
+setcolor(5); 
+rectangle(x, y+3, b, c); 
+if(i!=5) 
+{ 
+setcolor(i); 
+settextstyle( GOTHIC_FONT, HORIZ_DIR, 6); 
+moveto(180,100); 
+outtext("SOFTWARE"); 
+} 
+if(i!=5) 
+{ 
+setcolor(1+i); 
+settextstyle( GOTHIC_FONT, HORIZ_DIR, 3); 
+moveto(280,150); 
+outtext("OF"); 
+} 
+if(i!=5) 
+{ 
+setcolor(i+2); 
+settextstyle( DEFAULT_FONT, HORIZ_DIR, 6); 
+moveto(100, 200); 
+outtext("MOVIE SHOP"); 
+delay(dly); 
+} 
+} 
+getch(); 
+closegraph(); 
+
+clrscr(); 
+int chv; 
+
+i=0; 
+
+strcpy(film[0].name,"mummy returns"); 
+strcpy(film[0].type,"english"); 
+film[0].id=1; 
+
+strcpy(film[1].name,"rush hour"); 
+strcpy(film[1].type,"english"); 
+film[1].id=2; 
+
+strcpy(film[2].name,"spy kids"); 
+strcpy(film[2].type,"english"); // movies names 
+film[2].id=3; 
+
+strcpy(film[3].name,"proof of life"); 
+strcpy(film[3].type,"english"); 
+film[3].id=4; 
+
+strcpy(film[4].name,"15 minutes"); 
+strcpy(film[4].type,"english"); 
+film[4].id=5; 
+
+strcpy(film[5].name,"Tomb raider"); 
+strcpy(film[5].type,"english"); 
+film[5].id=6; 
+
+strcpy(film[6].name,"A knights tale"); 
+strcpy(film[6].type,"english"); 
+film[6].id=7; 
+
+strcpy(film[7].name,"replicant"); 
+strcpy(film[7].type,"english"); 
+film[7].id=8; 
+
+strcpy(film[8].name,"MI 2"); 
+strcpy(film[8].type,"english"); 
+film[8].id=9; 
+
+strcpy(film[9].name,"Batman"); 
+strcpy(film[9].type,"english"); 
+film[9].id=10; 
+
+strcpy(film[10].name,"Replacement Killer"); 
+film[10].id=11; 
+strcpy(film[10].type,"english"); 
+
+strcpy(film[11].name,"Boys And Girls"); 
+film[11].id=12; 
+strcpy(film[11].type,"english"); 
+
+strcpy(film[12].name,"saving Private Ryan"); 
+film[12].id=13; 
+strcpy(film[12].type,"english"); 
+
+strcpy(film[13].name,"titanic"); 
+film[13].id=14; 
+strcpy(film[13].type,"english"); 
+
+strcpy(film[14].name,"Someone Like You"); 
+film[14].id=15; 
+strcpy(film[14].type,"english"); 
+
+strcpy(film[15].name,"legends of the fall"); 
+film[15].id=16; 
+strcpy(film[15].type,"english"); 
+
+strcpy(film[16].name,"a walk in clouds"); 
+film[16].id=17; 
+strcpy(film[16].type,"english"); 
+
+strcpy(film[17].name,"America's Sweetheart"); 
+film[17].id=18; 
+strcpy(film[17].type,"english"); 
+
+strcpy(film[18].name,"Con Air"); 
+film[18].id=19; 
+strcpy(film[18].type,"english"); 
+
+strcpy(film[19].name,"Road trip"); 
+film[19].id=20; 
+strcpy(film[19].type,"english"); 
+
+strcpy(film[20].name,"fast and furious"); 
+film[20].id=21; 
+strcpy(film[20].type,"english"); 
+
+strcpy(film[21].name,"artifical intelligence"); 
+film[21].id=22; 
+strcpy(film[21].type,"english"); 
+
+strcpy(film[22].name,"final fantasy"); 
+film[22].id=23; 
+strcpy(film[22].type,"english"); 
+
+strcpy(film[23].name,"the score"); 
+film[23].id=24; 
+strcpy(film[23].type,"english"); 
+
+strcpy(film[24].name,"planet of the apes"); 
+film[24].id=25; 
+strcpy(film[24].type,"english"); 
+
+strcpy(film[25].name,"made"); 
+film[25].id=26; 
+strcpy(film[25].type,"english"); 
+
+strcpy(film[26].name,"dragon"); 
+film[26].id=27; 
+strcpy(film[26].type,"english"); 
+
+strcpy(film[27].name,"Air Force 1"); 
+film[27].id=28; 
+strcpy(film[27].type,"english"); 
+
+strcpy(film[28].name,"hannibal"); 
+film[28].id=29; 
+strcpy(film[28].type,"english"); 
+
+strcpy(film[29].name,"speed"); 
+film[29].id=30; 
+strcpy(film[29].type,"english"); 
+
+f: 
+
+clrscr(); 
+int c1,c2,c3,c4,c5,c6,c1b,c2b,c3b,c4b,c5b,c6b; 
+int move = 1; 
+char ch; 
+do 
+{ 
+clrscr(); 
+
+textcolor(4);cprintf (" SOFTWARE " );
+//textcolor(11);cprintf ("ZARRAR AHMAD\n\n "); 
+textbackground(BLACK); 
+textattr(YELLOW); 
+printf("\n\t "); 
+cprintf("*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*"); 
+printf("\n\t "); 
+cprintf("*#* "); 
+textbackground(BLUE); 
+textcolor(LIGHTRED|BLINK); 
+cprintf(" SELECT FROM THE FOLLOWING OPTIONS "); 
+textbackground(BLACK); 
+textcolor(YELLOW); 
+cprintf(" *#*"); 
+printf("\n\t "); 
+cprintf("*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*"); 
+cout<<"\n\n\n"; 
+if (ch == 'H') 
+{ 
+if (move == 1) move = 6; 
+else if (move > 1) move--; 
+} 
+else if (ch == 'P') 
+{ 
+if (move == 6) move = 1; 
+else if (move < 6) move++; 
+} 
+c1 = c2 = c3 = c4 = c5 = c6 = 15; 
+c1b = c2b = c3b = c4b = c5b = c6b = 0; 
+if (move == 1) {c1 = 14; c1b = 9;} 
+else if (move == 2) {c2 = 14; c2b = 9; } 
+else if (move == 3) {c3 = 14; c3b = 9; } 
+else if (move == 4) {c4 = 14; c4b = 9; } // main menu 
+else if (move == 5) {c5 = 14; c5b = 9; } // displays total options of 
+else {c6 = 14; c6b = 9; // data base 
+} 
+textcolor(c1); textbackground(c1b); 
+cprintf("\n\r 1 Input Customer Data "); 
+textcolor(c2); textbackground(c2b); 
+cprintf("\n\r 2 Return Movie "); 
+textcolor(c3); textbackground(c3b); 
+cprintf("\n\r 3 Business Of Movie "); 
+textcolor(c4); textbackground(c4b); 
+cprintf("\n\r 4 View Data Base "); 
+textcolor(c5); textbackground(c5b); 
+cprintf("\n\r 5 Search By Customer No"); 
+textcolor(c6); textbackground(c6b); 
+cprintf("\n\r 6 Exit The Program "); 
+cout <<"\n\n OPTION SELECTED : " <<move; 
+textcolor(15); textbackground(0); 
+ch = getch(); 
+sound(1000); delay(10);nosound(); 
+
+} 
+while (ch != 13); 
+sound(1000); delay(200); 
+sound(2000); delay(200); nosound(); // for sound output 
+int choice; 
+do 
+{ 
+choice=move; 
+switch(choice) 
+{ 
+case 1: 
+{ 
+clrscr(); 
+if(i<60) 
+{ 
+fflush(stdin); 
+cout<<"\n\nEnter your name :"; 
+gets(person[i].names); 
+ofstream outfile; 
+outfile.open("file.txt",ios::app|ios::binary); 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(0,ios::end); 
+int z= (int)infile.tellg()/ sizeof(person); 
+if(z>0) 
+{ 
+ofstream out; 
+out.open("fold.txt",ios::app|ios::binary); 
+ifstream in; //for customer with same name 
+in.open("fold.txt",ios::binary); 
+in.seekg(0,ios::end); 
+int s=(int)in.tellg()/ sizeof(sport); 
+
+if(s>0) 
+{ 
+struct sign 
+{int a; 
+char b[30]; 
+}pk[30]; 
+
+int m=0; 
+for(int k=0;k<z;k++) 
+{ 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(k*sizeof(person)); 
+infile.read((char*)&p[k],sizeof (person)); // reads data 
+
+if(strcmp(person[i].names,p[k].nam)==0) 
+{ 
+strcpy(pk[m].b,p[k].nam); 
+pk[m].a=k+1; 
+m++; 
+} 
+} 
+int r=0; 
+for( k=0;k<m;k++) 
+for(int y=0;y<s;y++) 
+{ 
+ifstream in; 
+in.open("fold.txt",ios::binary); 
+in.seekg(y*sizeof(sport)); 
+in.read((char*)&d[y],sizeof (sport)); 
+if(strcmp(pk[k].b,d[y].c_nam)==0&&pk[k].a==d[y].check) 
+r++; 
+} 
+if(r==m) 
+goto e; 
+else 
+{ 
+cout<<"film not returned by the customer"<<endl; 
+cout<<"press any key to return to main menu"<<endl; 
+getch(); 
+goto f; 
+} 
+
+} 
+if(s<=0) 
+{ 
+for(int k=0;k<z;k++) 
+{ 
+ifstream infile; 
+infile.open("file.txt",ios::binary); 
+infile.seekg(k*sizeof(person)); 
+infile.read((char*)&p[k],sizeof (person)); 
+
+if(strcmp(person[i].names,p[k].nam)==0) 
+{ 
+cout<<"film not returned"<<endl; 
+cout<<"press any key to return to main menu"<<endl; 
+getch(); 
+goto f; 
+} 
+else 
+goto e; 
+
+} 
+} 
+} 
+e: 
+cout<<"\nEnter telephone number :"; 
+gets(person[i].tel); 
+cout<<"\nEnter Address :"; 
+gets(person[i].address); 
+cout<<"\n\nPress Any Key TO View The Movies Names "; 
+getch(); 
+clrscr(); 
+int st=0; 
+for(int zt=0;zt<20;zt+=2) 
+{ 
+gotoxy(3,zt+3); 
+cout<<st+1<<"] " <<film[st].name; 
+st++; 
+} 
+st=10; 
+for( zt=0;zt<20;zt+=2) // shows all movie database 
+{ 
+gotoxy(25,zt+3); 
+cout<<st+1<<"] " <<film[st].name; 
+st++; 
+} 
+st=20; 
+for( zt=0;zt<20;zt+=2) 
+{ 
+gotoxy(50,zt+3); 
+cout<<st+1<<"] " <<film[st].name; 
+st++; 
+} 
+cout<<"\n\nEnter ID # of Video Film : "; 
+int in=0; 
+cin>>in; 
+if(in<1||in>30) 
+{ 
+cout<<"Invalid ID No"<<endl; 
+cout<<"press any key to return to main menu"<<endl; 
+getch(); 
+goto f; 
+} 
+idno[i]=in; 
+idno[i]-=1; 
+strcpy(person[i].status,status2); 
+_strdate(idate);_strtime(itime); 
+clrscr(); 
+strcpy(p[i].nam,person[i].names); 
+strcpy(p[i].tele,person[i].tel); 
+strcpy(p[i].plc,person[i].address); 
+p[i].f_id=film[idno[i]].id; 
+strcpy(p[i].flm,film[idno[i]].name); 
+strcpy(p[i].f_tp,film[idno[i]].type); 
+strcpy(p[i].stat,person[i].status); 
+strcpy(p[i].stat1,status1); 
+strcpy(p[i].dte,idate); 
+strcpy(p[i].tme,itime); 
+outfile.write((char*)&p[i],sizeof(person)); 
+// writes the data onto file 
+ifstream infil; 
+infil.open("file.txt",ios::binary); 
+infil.seekg(0,ios::end); 
+int n= (int)infil.tellg()/ sizeof(person); 
+cout<<"Data has been stored for customer no "<<n+1; 
+sleep(2); 
+i++; 
+goto f; 
+} 
+} 
+case 2: 
+{ 
+R_video();goto f; 
+} 
+case 3: 
+{ 
+B_video();goto f // goto function causes the control to 
+; // move to main menu 
+} 
+case 4: 
+{ 
+V_data();goto f; 
+} 
+case 5: 
+{ 
+s_customer_no();goto f; 
+} 
+} 
+} 
+while(choice!=6); 
+
+} 
+

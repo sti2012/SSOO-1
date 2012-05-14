@@ -1,0 +1,64 @@
+EJERCICIOS PROPUESTOS, CAPÍTULO 7
+1o)
+Realizar un programa que tome dos argumentos en la línea de
+órdenes. El primero es el nombre de un archivo, el segundo es un carácter. El
+programa debe explorar el archivo especificado, buscando el carácter. Si el
+archivo contiene al menos uno de estos caracteres, informa del hecho.
+2o)
+Escribir un programa que lea un archivo de texto y cuente cuántas
+veces se repite cada letra de la ’A’ a la ’Z’. Debe mostrar los resultados (no
+diferenciar entre letras mayúsculas y minúsculas).
+3o)
+Crear un programa que copie los contenidos de un archivo de texto
+en otro. El programa debe aceptar tres argumentos en la líneas de órdenes. La
+primera que sea el nombre del archivo fuente, la segunda el nombre del archivo
+destino, y la tercera opcional. Si existe y es igual a "mirar" el programa
+mostrará cada carácter al copiar los archivos; en caso contrario, no se
+muestra ninguna salida por pantalla. Si no existe el archivo destino crearlo.
+4o)
+Obtener un programa que compare dos archivos, cuyos nombres se
+especifican en la línea de órdenes, y que presente en pantalla el mensaje "Los
+archivos son iguales" si se cumple la condición de igualdad, o bien muestre
+el byte con la primera diferencia.
+5o)
+Realizar un programa que cuente el número de bytes de un archivo
+(de texto o binario) y muestre el resultado. El usuario debe especificar el
+archivo en la línea de órdenes.
+6o)
+Escribir un programa que intercambie los contenidos de los dos
+archivos cuyos nombres se especifican en la línea de órdenes. Es decir, dados
+dos archivos llamados FICH1 y FICH2, después de ejecutarlo FICH1 contendrá los
+que inicialmente tenía FICH2, y FICH2 almacenará el contenido de FICH1 (ayuda:
+utilizar un archivo temporal para ayudar al proceso de intercambio).
+7o)
+Crear un programa que permita guardar un listín telefónico en un
+archivo de disco. El programa debe mostrar el siguiente menú:
+1.
+2.
+3.
+4.
+5.
+El
+Introducir nombre y números
+Buscar números
+Guardar listín en disco
+Cargar listín desde el disco
+Salir
+programa debe ser capaz de guardar 100 nombre y números.
+8o)
+Realizar un programa que utilice fgets() para mostrar los
+contenidos de un archivo de texto, pantalla a pantalla. Después de que se
+muestre la pantalla, el programa debe pedir más al usuario.
+9o)
+Utilizando las funciones ftell() y fseek(), escribir un programa
+que permita copiar los contenidos de un archivo en otro en orden inverso
+(prestar especial atención al modo en que se encuentra el final de fichero).
+(Ayuda: algunos ficheros terminan en un indicador de fin_de_archivo, que no
+se debe copiar).
+10o) Escribir un programa que muestre los contenidos de un archivo de
+texto (especificado en la línea de órdenes) línea a línea. Después de que se
+muestre cada línea, debe preguntar al usuario si quiere ver otra línea.
+11o) Crear un programa que utilice fwrite() para escribir 100 enteros
+generados aleatoriamente en un archivo llamado RAND.
+12o) Escribir un programa que utilice fread() para mostrar los enteros
+almacenados en el archivo RAND creado en el ejercicio anterior.

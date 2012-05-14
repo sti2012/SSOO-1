@@ -1,0 +1,69 @@
+EJERCICIOS PROPUESTOS, CAPÍTULO 4
+1o)
+¿Qué es un puntero?. ¿Cuáles son los operadores puntero y qué
+efectos tienen?.
+2o)
+¿Porqué es importante el tipo de base de un puntero?.
+3o) ¿Cuál es la ventaja de utilizar punteros en lugar de indexar
+ tablas?. 
+4o) ¿Qué se genera cuando se utiliza un nombre de tabla sin índice?.
+5o) ¿Es correcto este fragmento?. Si es correcto, explicar porqué
+ funciona: 
+char *dir_p = "esto es una cadena" ;
+6o)
+Escribir un programa que por medio de un bucle for cuente de 0 a
+9, mostrando los números en pantalla. Imprimir los números utilizando un
+puntero.
+7o)
+¿Es correcto este fragmento?, ¿porqué?.
+int cuenta[10] ;
+.
+.
+.
+cuenta = cuenta + 2 ;
+8o)
+¿Qué muestra este fragmento?
+int varios[5] = {10, 19, 23, 8, 9} ;
+int *dir_p ;
+dir_p = varios ;
+printf("%d", *(dir_p + 3)) ;
+9o)
+Escribir un programa que introduzca una cadena. Después hacer que
+el programa busque el primer espacio. si encuentra uno, que imprima el resto
+de la cadena.
+10o) Escribir un programa, utilizando punteros, que no pare de leer
+cadenas hasta que se introduzca STOP.
+11o) Crear una "ayuda de decisión ejecutiva". Esto es un programa que
+contesta si, no o quizás a una pregunta introducida por teclado.
+Para crear este programa debe utilizarse una tabla de punteros a
+carácter e inicializarlos para que apunten a estas tres cadenas:
+"si"
+"no"
+"quizás - repita pregunta"
+Después, introducir la pregunta del usuario y encontrar la longitud de
+la cadena. Luego, utilizar esta fórmula para calcular un índice en la tabla
+de punteros:
+indi = longitud % 3
+Cap.4-26
+Capítulo 4: Punteros
+12o) Escribir un programa que
+un puntero a entero. Antes de que
+direcciones de la variable entera,
+(recordar, %p muestra el valor de un
+Programación en C
+asigne un valor a un entero utilizando
+termine el programa, que muestre las
+el puntero, y el puntero a puntero
+puntero).
+13o) Una de las funciones estándar de biblioteca de C se llama puts();
+escribe un argumento de cadena en la pantalla seguido de un salto de línea.
+Realizar un programa con punteros que sea una versión de puts() llamada
+miputs().
+14o) Escribir una versión particular de strlen() llamada mistrlen() y
+probarla en un programa.
+15o) Escribir una versión personalizada de strcat() llamada mistrcat(),
+y aplicarla en un programa que lo demuestre.
+16o) Escribir un programa que pase un puntero a una variable entera a
+una función. Dentro de la función asigne a la variable el valor -1. Después
+de volver de la función, demuestre que la variable realmente contiene -1,
+imprimiendo su valor.

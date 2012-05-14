@@ -1,0 +1,197 @@
+Program : Phone Book Program implemented in C. 
+--------------------------------------------------------------------------------
+
+/*
+Language: C\C++
+Category: Database\Files
+Description: its a phone book in two language
+*/
+# include <stdlib.h>
+# include <dos.h>
+# include <graphics.h>
+# include <string.h>
+# include <stdio.h>
+# include <iostream.h>
+# include <conio.h>
+ struct phone
+  {
+  char name[20];
+  char tel [20];
+  char adr[50];
+  }t[100];
+    void main()
+{
+int gm,gd=0;
+initgraph(&gd,&gm,"..\\bgi");
+settextstyle(TRIPLEX_FONT,0,7);
+outtextxy(140,190,"PHONE BOOK");
+setcolor(6);
+settextstyle(TRIPLEX_FONT,0,4);
+outtextxy(90,390,"PRODUCED BY HAMID RAFIEI");
+for (int s=15;s<615;s++)
+{
+putpixel(s,10,4);
+putpixel(s,13,4);
+delay (7);
+putpixel(15,s,4);
+putpixel(18,s,4);
+}
+for (s=619;s>20;s--)
+{
+putpixel(s,469,4);
+putpixel(s,466,4);
+delay (7);
+putpixel(619,s-155,4);
+putpixel(616,s-155,4);
+}
+closegraph();
+clrscr();
+int i1,b,i=0,c1=0,z1;
+char k,x,z[20],z3[50],z2[20],z4[20];
+gotoxy (8,6);
+printf(" TO CREATE PLEASE ENTER (C/c):");
+gotoxy(12,8);
+printf("TO FOUND THE NAME PLEASE ENTER (F/f):");
+gotoxy(16,10);
+printf("TO DELETE THE NAME PLEASE ENTER (D/d):");
+gotoxy(20,12);
+printf("TO APPEND THE NAME PLEASE ENTER (A/a):");
+gotoxy(24,14);
+printf("TO QUIT THE PROGRAM PLEASE ENTER (Q/q):");
+gotoxy(28,16);
+printf("TO USE HELP ENTER (H/h):");
+gotoxy(10,20);
+printf("WHAT IS YOUR ANSWER ?");
+gotoxy(33,20);
+start:
+b=getch();
+switch (b)
+{
+case 'c':
+case 'C':
+
+while(1)
+ {
+
+ printf("\n ENTER %dTH NAME AND TEL.NUMBER AND ADRESS:",i+1);
+ scanf("%s %s %s",t[i].name,t[i].tel,t[i].adr);
+
+ printf("\n IF YOU WANT TO STOP CREATING PLEASE ENTER z ,IF YOU DONT WANT PLEASE ENTER N:");
+ x=getche();
+ i++;c1++;
+ if (x==122)
+ {break;
+ }}
+ printf("YOUR CREATING IS FINISHED AND YOU ENTERED %dTH NAME",c1);
+ printf("\n\nACORDING TO MAIN MENU PLEASE CHOOSE THE OTHER MENUSE");
+
+printf("\n(CREAT\\C,DELETE\\D,APPEND\\A,FIND\\F,QUIT\\Q)");goto
+ start;
+ case 'f':
+ case 'F':
+ clrscr ();
+ if(i==0)
+ printf("\nYOU DON'T CREAT THE LIST");
+ else
+ {printf("\nPLEASE ENTER THE NAME THAT YOU WANT TO FIND:");
+  scanf("%s",&z);
+  for(i1=0;i1<=c1;i1++)
+ {
+ z1=strcmp(z,t[i1].name);
+ if (z1==0)
+ {printf("\nYOUR NAME IS EXIST IN LIST AND THE TEL.NUMBER is : %s  AND ADRESS IS: %s",t[i1].tel,t[i1].adr);
+ break;}
+ }
+
+ if(i1>c1)
+ printf("\nYOUR NAME ISN'T EXIST IN LIST");}
+ //going to start
+ printf("\n\nACORDING TO MAIN MENU PLEASE CHOOSE THE OTHER MENUSE");
+
+printf("\n(CREAT\\C,DELETE\\D,APPEND\\A,FIND\\F,QUIT\\Q)");goto start;
+
+ break;
+ case 'd':
+ case 'D':
+ clrscr();
+ if(i==0)
+ printf("\n YOU DON'T CREAT THE LIST");
+ else
+ {printf("\n ENTER THE NAME THAT YOU WANT TO DELETE ");
+ scanf("%s",&z);
+ for (i1=0;i1<=c1;i1++)
+ {
+ z1=strcmp(z,t[i1].name);
+ if (z1==0)
+ {strcpy(z2,t[i1].name);strcpy(z3,t[i1].adr);strcpy(z4,t[i1].tel);
+ strcpy( t[i1].name , t[c1].name);
+ strcpy(t[i1].adr , t[c1].adr);
+ strcpy(t[i1].tel , t[c1].tel);
+ strcpy(t[c1].name , z2);
+ strcpy(t[c1].adr , z3);
+ strcpy(t[c1].tel , z4);
+c1-=1;printf("\nYOUR NAME DELETED");}
+else if(i1>c1)
+printf("\nYOUR NAME ISN'T EXIST IN LIST");}
+}
+ //going to start
+ printf("\n\nACORDING TO MAIN MENU PLEASE CHOOSE THE OTHER MENUSE");
+
+printf("\n(CREAT\\C,DELETE\\D,APPEND\\A,FIND\\F,QUIT\\Q)");goto
+ start;
+
+break;
+case 'a':
+case 'A':
+clrscr();
+printf("\nENTER THE NAME AND TEL.NUMBER AND ADRESS:");
+
+scanf("%s %s %s",&z2,&z4,&z3);
+
+for (i1=0;i1<=c1;i1++)
+{
+z1=strcmp(z2,t[i1].name);
+if (z1==0)
+{
+printf("\n YOUR NAME WAS EXIST IN LIST");break;}
+else
+{c1+=1;strcpy(t[c1].name,z2);strcpy(t[c1].adr,z3);strcpy(t[c1].tel,z4);printf("\n YOUR NAME AND TEL.NUMBER AND ADRESS APPENDED");break;}
+}
+//going to start
+ printf("\n\nACORDING TO MAIN MENU PLEASE CHOOSE THE OTHER MENUSE");
+
+printf("\n(CREAT\\C,DELETE\\D,APPEND\\A,FIND\\F,QUIT\\Q)");goto
+ start;
+
+break;
+
+case 'q':
+case 'Q':
+clrscr();
+printf("\nNOW YOU WILL EXIT FROM THE PROGRAM");
+delay(1000);
+exit (1);
+break;
+case 'h':
+case 'H':
+clrscr();
+
+printf("\n\n\n\n\n\n	       BEFORE USE THIS PROGRAM YOU SHOULD KNOW SOMETHINGS.");
+printf("\n 	   FIRST YOU MOST CREAT THE LIST,BE CAREFUL YOU SHOULD ");
+printf("\n 		TYPE THE NAME IN SPECIAL FORM FOR EXAMPLE:");
+printf("\n 	SACHIN_TENDULKAR!!! WHEN THE PROGRAM ASK YOU NAME TEL NO. ADDRESS");
+printf("\n 	YOU SHOULD TYPE IN THIS FORM : SACHIN_TENDULKAR 6242395 MUMBAI");
+printf("\n 		       YOU CANT TYPE THE NAME WITH ESCAPE");
+printf("\n 		 PLEASE CREAT THE LIST AND ENJOY THIS PROGRAM");
+printf("\n\n\n\n                            GOODLUCK");
+getch();
+printf("\n\n\n\n\nACORDING TO MAIN MENU PLEASE CHOOSE THE OTHER MENUSE");
+
+printf("\n(CREAT\\C,DELETE\\D,APPEND\\A,FIND\\F,QUIT\\Q)");goto
+ start;
+
+
+
+}
+}
+

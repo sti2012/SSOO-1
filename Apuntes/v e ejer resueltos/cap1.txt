@@ -1,0 +1,159 @@
+EJERCICIOS PROPUESTOS, CAPÍTULO 1
+1o)
+Suponiendo que todas las variables son de tipo int, indicar el
+valor de cada una de las siguientes expresiones:
+A)
+B)
+C)
+D)
+E)
+x
+x
+x
+x
+x
+=
+=
+=
+=
+=
+(5 + 2) * 4;
+(3 + 2) / 4 * 5;
+y = (2 + 4) * 6;
+(int)2.4 * 4.5;
+(3 + 3) * 10.5;
+2o) ¿Dan el mismo resultado estas expresiones?
+x = y / 3 - 34 * temp -127
+x = (y / 3) - ( (34 * temp) -127 )
+3o) Evaluar las siguientes expresiones:
+A)
+B)
+C)
+D)
+2 > 3
+’a’ < ’b’
+2 == 3
+’3’ == ’3’
+4o) Reescribir la siguiente instrucción utilizando
+incremental y usando el operador de asignación aritmética.
+el
+operador
+x = x + 1;
+5o) Indicar cuál de las siguientes proposiciones son ciertas y cuáles
+son falsas:
+A)
+B)
+C)
+D)
+E)
+10 > 3
+’B’ > ’D’
+10 > 4 || 7 > 9
+!(10 > 3)
+!(10 == 9)
+6o) Construir una expresión para indicar las siguientes condiciones:
+A)
+B)
+C)
+D)
+num es mayor que 3 y menor que 9.
+ch no es una b ni una c.
+num está entre 3 y 9 ambos inclusive. Pero no es 6.
+num no está entre 3 y 9.
+7o) Cuál es el valor numérico de las siguientes expresiones:
+A)
+B)
+C)
+D)
+8o)
+7
+1
+x
+5
+>
++
+>
++
+2
+3 > 2 && 4 < 1
+y || y > x || X == y
+(7 > 4)
+Dadas estas variables:
+char ch;
+short i;
+unsigned long ul;
+float;
+¿Cuál es el tipo que incluye a las demás en esta expresión?
+f / ch -(i * ul);
+¿Cuál es el tipo de la subexpresión i*ul de arriba?
+Cap.1-39
+Capítulo 1: Principios fundamentales
+Programación en C
+9o) ¿Qué muestra este programa?
+#include <stdio.h>
+main()
+{
+float f;
+f = 10/3;
+printf("%f", f);
+}
+10o) ¿Qué imprimirá este programa?
+#define NUM 4
+main()
+{
+char car1, car2;
+float num;
+car1 = ’S’;
+car2 = ’O’;
+num = NUM ;
+printf("%c%c%c-%1d-%2.1f\n", car1, car2, car1, NUM,num);
+}
+11o) ¿Qué imprimirá el siguiente programa?
+#include<stdio.h>
+#define EJEMPLO "%s esto es un ejemplo\n"
+main()
+{
+int x = 0;
+printf
+printf
+printf
+printf
+printf
+(EJEMPLO,EJEMPLO);
+("%d\n", x++);
+("%d\n", ++x);
+("%d\n", x--);
+("%d\n", x);
+}
+12o)
+teoría.
+Introducir, compilar y ejecutar el primer programa de la
+13o)
+Escribir un programa que declare una variable entera llamada
+número y se le asigne el valor del año actual. Mostrar el valor en pantalla
+del modo siguiente:
+El año actual es: ____
+14o) Realizar un programa que lea una cadena que contiene 5 espacios
+("Esta cadena si la toma scanf()") utilizando la función scanf(), por medio
+del conjunto de inspección.
+15o) Escribir un programa que sume y reste 2 números (punto flotante).
+Los operandos deben ser leídos por teclado.
+16o)
+Calcular la longitud de una circunferencia. Pidiéndose el radio
+y dando el resultado en pantalla.
+17o)
+pantalla.
+Calcular el número de segundos que tiene un año y presentarlo en
+Cap.1-40
+Capítulo 1: Principios fundamentales
+18o)
+Programación en C
+¿Son correctos estos comentarios?
+/ ** /
+/* printf("¿Esto es un comentario?"); */
+19o)
+Empleando funciones creadas por el usuario, realizar un programa
+que calcule el cuadrado y el cubo de un número dado por teclado.
+20o)
+Dada una cantidad en formato decimal, presentar en pantalla su
+equivalente hexadecimal y octal.

@@ -1,0 +1,220 @@
+Program : Bricks Game in C/C . 
+--------------------------------------------------------------------------------
+
+/*
+Language: C\C++ (To convert to C, 
+just change cout to printf and cin to scanf and 
+change the library files)
+Category: Miscellaneous
+Description: bricks game
+*/
+
+#include"graphics.h"
+#include<iostream.h>
+#include<stdio.h>
+#include<conio.h>
+#include<dos.h>
+#include<stdlib.h>
+
+int getkey();
+
+void main()
+{
+registerbgidriver(EGAVGA_driver);
+int gd,gm;
+gd=DETECT;
+initgraph(&gd,&gm," ");
+cleardevice();
+
+int ar,xc,yc,xr=0,yr=195,a=1,b=1,c=0,are;
+void *bu,*buf;
+int X=0,Y=0,s,area1;
+void *buff1;
+
+rectangle(0,0,50,25);
+setfillstyle(6,6);
+floodfill(2,2,15);
+ar=imagesize(0,0,50,25);
+bu=malloc(ar);
+getimage(0,0,50,25,bu);
+putimage(0,0,bu,XOR_PUT);
+rectangle(0,0,50,25);
+setfillstyle(6,8);
+floodfill(2,2,15);
+are=imagesize(0,0,50,25);
+buf=malloc(are);
+getimage(0,0,50,25,buf);
+putimage(0,0,buf,XOR_PUT);
+for(int j=0;j<180;j+=27)
+ for(int i=0;i<600;i+=52)
+  putimage(0+i,27+j,bu,XOR_PUT);
+putimage(0,27,bu,XOR_PUT);
+putimage(572,27,bu,XOR_PUT);
+putimage(0,27,buf,XOR_PUT);
+putimage(572,27,buf,XOR_PUT);
+
+setcolor(3);
+rectangle(80,445,159,452);
+setfillstyle(1,1);
+floodfill(82,447,3);
+area1=imagesize(80,445,159,452);
+buff1=malloc(area1);
+getimage(80,445,159,452,buff1);
+
+setcolor(4);
+line(0,479,640,479);
+
+    int area,x=325,y=325,ch,xdirn=-1,ydirn=-1,step;
+    int maxx,maxy;
+    void *buff;
+
+    setcolor(WHITE);
+    setfillstyle(SOLID_FILL,RED);
+    circle(350,350,5);
+    floodfill(350,350,WHITE);
+
+    area=imagesize(345,345,355,355);
+    buff=malloc(area);
+    getimage(345,345,355,355,buff);
+    putimage(345,345,buff,XOR_PUT);
+
+
+  while (1)
+  {
+    putimage(x, y, buff, XOR_PUT);
+    delay(15);
+    putimage(x, y, buff, XOR_PUT);
+
+    x=x+(xdirn*2);
+    y=y+(ydirn*3);
+
+    if ( x + 10 - 1 > 640 )
+     {
+       xdirn*=-1;
+       x = 640 - 10 + 1;
+     }
+    if (x < 0)
+     {
+       xdirn*=-1;
+       x = 0;
+     }
+    if ( y + 10 - 1 > 470 )
+     {
+//       ydirn*=-1;
+//       y = 470 - 10 + 1;
+       cleardevice();
+       outtextxy(200,200,"Sorry! You loose the game.");
+       outtextxy(250,240,"Try Again!!!");
+       gotoxy(30,8);
+       cout<<"Total Score : "<<c;
+       delay(5000);
+       getch();
+       goto tt;
+     }
+    if(c==1020)
+    {
+       outtextxy(180,200,"Congrats! You have finished the
+game.");
+       gotoxy(30,8);
+       cout<<"Total Score : "<<c;
+       delay(5000);
+       getch();
+       goto tt;
+     }
+
+    if ( getpixel(x,y)==1 )
+     {
+       sound(500);
+       delay(15);
+       nosound();
+       ydirn*=-1;
+     }
+    if (getpixel(x,y)==6)
+     {
+       sound(100);
+       delay(50);
+       nosound();
+       ydirn*=-1;
+       xc=x;
+       yc=y;
+       a=xc/52;
+       b=(yc/27);
+       xr=a*52;
+       yr=b*27;
+       putimage(xr,yr,bu,XOR_PUT);
+       c+=10;
+     }
+    if (getpixel(x,y)==8)
+     {
+       sound(800);
+       delay(200);
+       nosound();
+       ydirn*=-1;
+       xc=x;
+       yc=y;
+       a=xc/52;
+       b=(yc/27);
+       xr=a*52;
+       yr=b*27;
+       putimage(xr,yr,buf,XOR_PUT);
+       c+=100;
+     }
+    if( y < 0 )
+     {
+      ydirn*=-1;
+      y=0;
+     }
+    gotoxy(65,1);
+    cout<<"SCORE : "<<c;
+
+if( kbhit() )
+{
+ s=getkey();
+ if(s!=1)
+ {
+   if(X>480)
+    {
+	X=480;
+	putimage(160+X,445+Y,buff1,XOR_PUT);
+    }
+   if(X<-80)
+    {
+	X=-80;
+	putimage(80+X,445+Y,buff1,XOR_PUT);
+    }
+   putimage(80+X,445+Y,buff1,XOR_PUT);
+//if(s==72)
+// Y+=-40;
+   if(s==75)
+	X+=-40;
+//if(s==80)
+// Y+=40;
+   if(s==77)
+	X+=40;
+   putimage(80+X,445+Y,buff1,XOR_PUT);
+//cout<<X;
+  }
+  if(s==1)
+  {
+tt: free(bu);
+    free(buff);
+    free(buff1);
+    closegraph();
+    exit(0);
+  }
+ }
+}
+free(bu);
+free(buff);
+free(buff1);
+closegraph();
+}
+
+int getkey()
+{
+union REGS j,o;
+j.h.ah=0;
+int86(22,&j,&o);
+return(o.h.ah);
+}
+

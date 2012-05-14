@@ -1,0 +1,129 @@
+EJERCICIOS PROPUESTOS, CAPÍTULO 6
+1o)
+Según el ámbito de las variables describe los siguientes tipos:
+- Global - Local (a una función)
+- Local (a un bloque) - Extern
+- Estática - Registro
+Ayúdate de ejemplos en la explicación.
+2o)
+¿Es correcto este programa?. Si no lo es, ¿porqué?.
+#include <stdio.h>
+mifunc(int num, int min, int max) ;
+main()
+{
+int i ;
+printf("Introduzca un número entre 1 y 10: ") ;
+mifunc(&i, 1, 10) ;
+}
+void mifunc(int num, int min, int max)
+{
+do
+{
+scanf("%d", num) ;
+}
+while(*num < min || * num > max) ;
+}
+3o)
+Realizar un programa que solicite un dato numérico al usuario.
+Recurrir a una función con llamada por referencia, a la que se debe llevar dos
+argumentos:
+A) el mensaje "Introduzca un número: " (utilizando punteros)
+B) la dirección de la variable que contenga el no.
+4o)
+Repetir el programa
+caracteres en lugar de un entero.
+anterior
+introduciendo
+una
+cadena
+de
+5o)
+Explicar el trabajo que realiza la siguiente función haciendo
+especial hincapié en el parámetro formal void *v[].
+void swap(void *tabla[], int x , int y)
+{
+void *temporal ;
+temporal = v[x] ;
+v[x] = v[y] ;
+v[y] = temporal ;
+}
+Cap.6-28
+Capítulo 6: Profundización en las Funciones
+6o)
+función? :
+Programación en C
+¿Cuáles son los parámetros formales del siguiente prototipo de
+ordenar(void *v[] ; int izq, int der, int(*comp)(void *, void *)) ;
+7o)
+¿Cómo se pasan los argumentos de una línea de órdenes a un
+programa en C ?.
+8o)
+Escribir un programa que contenga una función que tome como
+argumento una cadena de caracteres y devuelva un puntero al primer dígito
+(caracteres ’0’ al ’9’) que encuentre. Si la cadena no contiene ningún dígito
+se devolverá un NULL.
+9o)
+¿Están declaradas correctamente los parámetros de las funciones
+que van a recibir una tabla de enteros en el siguiente programa?. Razona tu
+respuesta.
+#include <stdio.h>
+void f1(int num[5]), f2(int num[]), f3(int *num) ;
+main()
+{
+int contador[5] = {1, 2, 3, 4, 5} ;
+f1(contador) ;
+f2(contador) ;
+f3(contador) ;
+}
+void f1(int num[5])
+{
+int i ;
+for(i = 0 ; i < 5 ; i++)
+printf("%d", num[i]) ;
+}
+void f2(int num[])
+{
+int i ;
+for(i = 0 ; i < 5 ; i++)
+printf("%d", num[i]) ;
+}
+void f3(int *num)
+{
+int i ;
+for(i = 0 ; i < 5 ; i++)
+printf("%d", num[i]) ;
+10o) Realizar un programa que contenga una función recursiva para que
+imprima los números del 0 al 9 en la pantalla.
+11o) Desarrollar un programa que utilice la recursividad para copiar
+una cadena en otra .
+Cap.6-29
+Capítulo 6: Profundización en las Funciones
+12o)
+Programación en C
+¿Qué está mal en esta función recursiva?. Razona tu respuesta.
+void f()
+{
+int i ;
+printf("en f() \n") ;
+for(i = 0; i < 10 ; i++)
+f() ;
+}
+13o) Cuando se tienen que pasar datos numéricos a un programa (hacia
+main()), esos datos se recibirán en forma de cadena. El programa tendrá que
+convertirlos en el formato numérico apropiado utilizando las funciones de
+biblioteca adecuadas. Describir las funciones más comunes, sus prototipos de
+función y el archivo de cabecera utilizado.
+14o)
+¿Qué hace el siguiente programa?.
+#include <stdio.h>
+#include <stdlib.h>
+void main(int argc, char *argv[v])
+{
+int i ;
+double d ;
+long l ;
+i = atoi( argv[1] ) ;
+d = atof( argv[2] ) ;
+l = atol( argv[3] ) ;
+printf("%d %ld %lf", i, l, d) ;
+}

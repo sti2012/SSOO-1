@@ -1,0 +1,188 @@
+EJERCICIOS PROPUESTOS, CAPÍTULO 5
+1o)
+En términos generales ¿qué es una estructura y una unión?. Indicar
+la forma de crear una estructura llamada tipo_es que contenga estos 5
+elementos:
+char
+float
+int
+char
+double
+2o)
+tipo_char
+;
+tipo_float ;
+tipo_int
+;
+tipo_cad[80];
+tipo_double ;
+¿Qué es incorrecto en este fragmento?. Razona tu respuesta.
+struct tipo_s
+{
+int i ;
+long l ;
+char cadena[80] ;
+}
+s ;
+...
+i = 10 ;
+...
+3o)
+¿Es posible nombrar a elementos de estructuras de igual forma que
+otras variables?, demostrarlo con un ejemplo.
+4o)
+Escribir un programa que utilice una tabla de estructuras para
+guardar los cuadrados y cubos de los números del 1 al 10. Al finalizar la
+carga, deben mostrarse los contenidos de la tabla.
+5o)
+Escribir un programa que utilice una tabla de estructuras para
+almacenar nombres de libros, autor y unidades. Limitar la base de datos a 5
+libros. Una vez finalizada la introducción de información, presentarla en
+pantalla.
+6o)
+Escribir un programa que contenga dos variables de estructura
+definidas como:
+struct tipo_str
+{
+int i ;
+char ch ;
+double d ;
+}var1, var2 ;
+El programa debe asignar valores iniciales a todos los elementos de
+ambas estructuras (asegurándose que los valores de dichos elementos sean
+diferentes). Debe usar una función llamada str_interc() para que el programa
+intercambie el contenido de var1 y var2.
+7o)
+En C, como ya se conoce, no se puede pasar una tabla a una función
+como un parámetro. Sin embargo, hay un modo de evitar esta restricción. Si
+se incluye la tabla dentro de una estructura, el array se pasa utilizando
+el convenido de llamada por valor estándar.
+Escribir un programa que lo demuestre pasando una cadena de una
+estructura a una función, alterando su contenido dentro de la función y
+demostrando que la cadena original no se modifica después de volver de la
+función.
+Cap.5-30
+Capítulo 5: Tipos de datos.- Definidos por usuario y Avanzados
+8o) ¿Qué es un campo de bits?.
+9o) 
+Programación en C
+¿Qué está mal en este fragmento?, ¿porqué?.
+struct tipo str
+{
+int a ;
+char b ;
+}
+dosvar, * dir_var ;
+...
+dir_var = & dosvar ;
+dir_var.a = 10 ;
+...
+10o) ¿Es necesario dar nombre a cada bit cuando se usa campos de bits?.
+demostrarlo con un ejemplo.
+11o) Escribir un programa que cree una estructura que contenga tres
+campos de bits llamados a, b y c. Los campos a y b deben tener un tamaño de
+tres bits y c de 2 bits. Deben declararse las variables como signed. A
+continuación asignar a cada una un valor y posteriormente mostrar los
+resultados.
+12o) Utilizando la estructura de campos de bits, realizar un programa
+que presente en pantalla el estado de los bits pertenecientes a los registros
+del puerto paralelo:
+Registro de datos
+Registro de control
+Registro de estado
+Para cada registro debe de ofrecerse información del significado de
+cada uno de los bits.
+13o) Escribir un programa que utilice una unión para convertir un -int-
+en un -long- y demuestre que esto funciona.
+14o) Escribir un programa que use una union para mostrar como un
+carácter los bytes individuales que forman un entero introducido por usuario.
+15o) ¿Qué muestra este fragmento? (suponer enteros de 2 bytes y doubles
+de 8 bytes).
+...
+union
+{
+int i ;
+double d ;
+}
+uvar ;
+printf("-%d-", sizeof uvar) ;
+...
+16o) Suponer que un compilador realmente sólo optimiza el tiempo de
+acceso de acceso de dos variables register por función. En este programa, ¿qué
+dos variables son las mejores para convertirlas en variables register?. Razona
+tu respuesta.
+Cap.5-31
+Capítulo 5: Tipos de datos.- Definidos por usuario y Avanzados
+Programación en C
+#include <stdio.h>
+#include <conio.h>
+main()
+{
+int i, j, k, m ;
+do
+{
+printf("Introduzca un valor: ") ;
+scanf("%d", &i) ;
+m = 0 ;
+for(j = 0; j < i ; j++)
+for(k = 0 ; k<100 ; k++)
+m = k + m ;
+}
+while(i > 0) ;
+}
+17o) Escribir un programa que contenga una función llamada sum_it() que
+tiene el prototipo:
+void sum_i(int valor) ;
+Hacer que esta función use una variable entera static local para
+mantener y mostrar un resultado total de los valores de los parámetros
+con los que se ha llamado. Por ejemplo, si sum_it() se llama tres veces
+con los valores 3, 6, 4 entonces sum_it() mostrará 3, 9 y 13.
+18o)
+¿Qué está mal en este fragmento?
+register int i ;
+int *p ;
+p = &i ;
+19o) ¿Dónde puede utilizarse la palabra reservada const?. Utilizar un
+ejemplo para demostrarlo.
+20o) Una variable declarada como const, ¿podría formar parte de una
+sentencia de asignación?. Razona tu respuesta.
+21o) Un buen momento para usar const es cuando se quiere introducir un
+número de control de versión en un programa. El uso de una variable const para
+guardar la versión, la protege de cambios accidentales. Escribir un programa
+que ilustre cómo se puede hacer esto. Usar el número de versión 9.99.
+22o)
+volatile.
+Por sí mismo, intentar desarrollar un ejercicio donde se utilice
+23o) Crear una enumeración de los meses del año.
+24o) ¿Es correcto este fragmento?. Razona tu respuesta.
+enum coches {seat, fiat, for} marca ;
+...
+marca = for ;
+Cap.5-32
+Capítulo 5: Tipos de datos.- Definidos por usuario y Avanzados
+Programación en C
+printf("el coche es %s", marca) ;
+...
+25o) Realizar un programa que muestre cómo hacer que UL sea el nuevo
+nombre para unsigned long. Comprobar que funciona escribiendo un pequeño
+programa que declare una variable usando UL, le asigne un valor y muestre el
+valor en la pantalla.
+26o)
+¿Qué está mal en este fragmento?.
+typedef balance float ;
+27o)
+Teniendo definida la estructura del siguiente programa:
+#include <stdio.h>
+struct tipo_s
+{
+int i ;
+char ch ;
+int *p ;
+double d ;
+}
+s ;
+main()
+{
+printf("tipo_s = %d", sizeof(struct tipo_s)) ;
+}
+¿Qué imprimirá en pantalla?.

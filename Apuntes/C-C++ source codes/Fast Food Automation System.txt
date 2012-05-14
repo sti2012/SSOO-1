@@ -1,0 +1,289 @@
+Program : Fast Food Automation System. 
+--------------------------------------------------------------------------------
+
+/*
+Language: C\C++
+Category: Database\Files
+Description: it is like a super-mart where user inputs codes of items
+he wants to purchase and receives a bill.
+*/
+//**********************************************************
+//	PROJECT FAST-FOOD AUTOMATION
+//**********************************************************
+
+//**********************************************************
+//	INCLUDED HEADER FILES
+//**********************************************************
+
+#include <iostream.h>
+#include <fstream.h>
+#include <process.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <conio.h>
+#include <dos.h>
+
+
+//**********************************************************
+//	CLASS NAME : menu
+//	DETAILS    : IT CONTROLS OVER ALL THE FUNCTIONS
+//**********************************************************
+
+class menu
+{
+	public :
+			void main_menu(void) ;
+	private :
+			void box(void) ;
+			void box_for_list(void);
+			void help(void);
+			void edit_menu(void) ;
+} ;
+
+
+//**********************************************************
+//	CLASS NAME : food
+//	DETAILS    : IT CONTROLS OVER ALL THE FUNCTIONS
+//                   RELATED TO FOOD ITEMS
+//**********************************************************
+
+class food
+{
+	public :
+			void add_item(void) ;
+			void delete_item(void) ;
+			void modify_item(void) ;
+			void list_of_item(void) ;
+			void purchase(void) ;
+	private :
+			int  last_code(void) ;
+			void delete_record(int) ;
+			void modify_record(int) ;
+			void display_record(int) ;
+			int  item_found(int) ;
+			int  recordno(int) ;
+			void sort(void) ;
+
+
+			int   itemcode ;
+			char  itemname[30] ;
+			float itemcost, itemprice ;
+} ;
+
+
+//**********************************************************
+//	CLASS NAME : account
+//	DETAILS    : IT CONTROLS OVER ALL THE FUNCTIONS
+//                   RELATED TO MAKING BILL
+//**********************************************************
+
+class account
+{
+	public :
+			void bill_list(void) ;
+			void prepare_bill(int) ;
+			int  last_billno(void) ;
+			void add_bill(int, int t_itemcode, char *t_itemname, float t_qty, float t_cost, float t_price) ;
+	private :
+			int   code, billno, length ;
+			int   dd, mm, yy ;
+			float cost, price, quantity ;
+			char  name[30] ;
+} ;
+
+
+//**********************************************************
+// THIS FUNCTION DRAWS BOX FOR THE MENUS
+//**********************************************************
+
+void menu :: box(void)
+{
+	char c1=178, c2=177, c3=176 ;
+	int k=1 ;
+	gotoxy(1,2) ;
+	for (int i=1; i<=1840; i++)
+	{
+		if (k == 1)
+			cout <<c1 ;
+		else
+		if (k == 2)
+			cout <<c2 ;
+		else
+		if (k == 3)
+			cout <<c3 ;
+		k++ ;
+		if (k == 4)
+			k = 1 ;
+	}
+	for (i=5; i<=21; i++)
+	{
+		gotoxy(21,i) ;
+		cout <<"                                        " ;
+	}
+}
+
+
+//**********************************************************
+// THIS CLASS CONTAINS FUNCTIONS RELATED TO DRAW A BOX ETC.
+//**********************************************************
+class shape
+{
+	public :
+			void line_hor(int, int, int, char) ;
+			void line_ver(int, int, int, char) ;
+			void box(int,int,int,int,char) ;
+} ;
+
+
+//**********************************************************
+// FUNCTION TO DRAW HORIZONTAL LINE
+//**********************************************************
+
+void shape :: line_hor(int column1, int column2, int row, char c)
+{
+	for ( column1; column1<=column2; column1++ )
+	{
+		gotoxy(column1,row) ;
+		cout <<c ;
+	}
+}
+
+
+//**********************************************************
+// FUNCTION TO DRAW VERTICAL LINE
+//**********************************************************
+
+void shape :: line_ver(int row1, int row2, int column, char c)
+{
+	for ( row1; row1<=row2; row1++ )
+	{
+		gotoxy(column,row1) ;
+		cout <<c ;
+	}
+}
+
+
+//**********************************************************
+// FUNCTION TO DRAW BOX LINE
+//**********************************************************
+
+void shape :: box(int column1, int row1, int column2, int row2, char
+c)
+{
+	char ch=218 ;
+	char c1, c2, c3, c4 ;
+	char l1=196, l2=179 ;
+	if (c == ch)
+	{
+		c1=218 ;
+		c2=191 ;
+		c3=192 ;
+		c4=217 ;
+		l1 = 196 ;
+		l2 = 179 ;
+	}
+	else
+	{
+		c1=c ;
+		c2=c ;
+		c3=c ;
+		c4=c ;
+		l1 = c ;
+		l2 = c ;
+	}
+	gotoxy(column1,row1) ;
+	cout <<c1 ;
+	gotoxy(column2,row1) ;
+	cout <<c2 ;
+	gotoxy(column1,row2) ;
+	cout <<c3 ;
+	gotoxy(column2,row2) ;
+	cout <<c4 ;
+	column1++ ;
+	column2-- ;
+	line_hor(column1,column2,row1,l1) ;
+	line_hor(column1,column2,row2,l1) ;
+	column1-- ;
+	column2++ ;
+	row1++ ;
+	row2-- ;
+	line_ver(row1,row2,column1,l2) ;
+	line_ver(row1,row2,column2,l2) ;
+}
+
+//**********************************************************
+// FUNCTION TO DISPLAY HELP ABOUT THE PROJECT
+//**********************************************************
+
+void menu :: help(void)
+{
+	clrscr() ;
+	shape s ;
+	s.box(2,1,79,25,218) ;
+	textbackground(RED+WHITE) ;
+	s.box(18,2,62,4,219) ;
+	textcolor(BLUE+BLINK) ;
+	textbackground(RED+WHITE) ;
+	gotoxy(21,3); cprintf("WELCOME TO PROJECT FAST-FOOD ") ;
+	cprintf("AUTOMATION");
+	textcolor(LIGHTGRAY) ;
+	delay(10) ;
+	gotoxy(10,6);  cout <<"In  this  Project  you  can keep  record  of  daily  consumption" ;
+	delay(10) ;
+	gotoxy(10,7);  cout <<"of food items. " ;
+	delay(10) ;
+	gotoxy(10,9);  cout <<"    This  program is capable of holding any no. of  bills." ;
+	delay(10) ;
+	gotoxy(10,11); cout <<"- In the first option you can purchase the food items" ;
+	delay(10) ;
+	gotoxy(10,12); cout <<"  enlisted in the menu card." ;
+	delay(10) ;
+	gotoxy(10,14); cout <<"- In the second option you can see the list of all the food items " ;
+	delay(10) ;
+	gotoxy(10,16); cout <<"- available.";
+	delay(10) ;
+	gotoxy(10,17); cout <<"- Through the third option you can do editing of the " ;
+	delay(10) ;
+	gotoxy(10,19); cout <<"- stored food item (add, modify, delete)." ;
+	delay(10) ;
+	gotoxy(10,20); cout <<"- In the fourth option you can see the list of all the bills." ;
+	delay(10) ;
+	gotoxy(10,22); cout <<"- (NOTE: Bills can be of the last month also." ;
+	delay(10) ;
+	gotoxy(10,24); cout <<"- And the last option is Quit (Exit to Dos).  " ;
+	delay(10) ;
+	textcolor(BLUE+BLINK) ; textbackground(RED+WHITE) ;
+	gotoxy(26,25) ; cprintf(" Press any key to continue ") ;
+	textcolor(LIGHTGRAY) ; textbackground(RED) ;
+	gotoxy(25,2) ;
+	getch() ;
+	for (int i=25; i>=1; i--)
+	{
+		delay(20) ;
+		gotoxy(1,i) ; clreol() ;
+	}
+}
+//**********************************************************
+// THIS FUNCTION DRAWS THE BOX FOR THE LIST OF FOOD ITEMS
+//**********************************************************
+void menu :: box_for_list()
+{
+	shape s ;
+	s.box(2,1,79,25,218) ;
+	s.line_hor(3,78,3,196) ;
+	s.line_hor(3,78,5,196) ;
+	s.line_hor(3,78,23,196) ;
+	textbackground(WHITE) ;
+	gotoxy(3,4) ;
+	for (int i=1; i<=76; i++) cprintf(" ") ;
+	textbackground(BLACK) ;
+	textcolor(BLACK) ; textbackground(WHITE) ;
+	gotoxy(4,4) ;
+	cprintf("ITEM CODE 	 ITEM NAME	       ITEM COST	 ITEM PRICE") ;
+	textcolor(LIGHTGRAY) ; textbackground(BLACK) ;
+	int d1, m1, y1 ;
+	st
+
+

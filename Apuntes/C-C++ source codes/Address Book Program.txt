@@ -1,0 +1,488 @@
+Program : Address Book Program in C/C . 
+--------------------------------------------------------------------------------
+
+/*
+Language: C\C++ (To convert to C, just change cout to printf and cin to scanf and change the library files)
+Category: Data Base
+Description: The program is an address book using concepts of
+file(random file access and all that)
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<fstream.h>
+#include<string.h>
+#include<conio.h>
+#define ENTER 13
+#define BACK 8
+
+
+struct student
+{
+  char name[30];
+  char proff[40];
+  char address[20];
+  char country[20];
+  char tel[20];
+  char fax[20];
+  char mobile[20];
+  char email[50];
+};
+
+class data
+{
+private:
+  student std;
+  int j,count;
+  char sname[50],pass[10],c;
+public:
+  struct student getData();
+  void showData(struct student);
+  void saveData();
+  int readData();
+  void delet();
+  void modify();
+  void searchData();
+  void emergency();
+  void password();
+  int checkpass();
+  void modpass();
+  char* takepass();
+  int checkvalidity(char []);
+};
+
+student data::getData()
+{
+	  cout<<"Name          : ";
+	  gets(std.name);
+	  cout<<"Proffession   : ";
+	  gets(std.proff);
+	  cout<<"Address       : ";
+	  gets(std.address);
+	  cout<<"Country       : ";
+	  gets(std.country);
+	  cout<<"Telephone     : ";
+	  gets(std.tel);
+	  cout<<"Fax           : ";
+	  gets(std.fax);
+	  cout<<"Mobile        : ";
+	  gets(std.mobile);
+	  cout<<"E.mail        : ";
+	  gets(std.email);
+}
+void data:: showData(student str)
+{
+	 clrscr();
+	 cout<<"\nName         : "<<str.name;
+	 cout<<"\nProffession  : "<<str.proff;
+	 cout<<"\nAddress      : "<<str.address;
+	 cout<<"\nCountry      : "<<str.country;
+	 cout<<"\nTelephone    : "<<str.tel;
+	 cout<<"\nFax          : "<<str.fax;
+	 cout<<"\nMobile       : "<<str.mobile;
+	 cout<<"\nE.mail       : "<<str.email;
+	 getch();
+}
+void data::modify()
+{
+	 char dname[30];
+	 int l;
+	 int coutn=0,choice;
+	 int k=0;
+	 l=checkpass();
+	 if(l==1)
+	 {
+	 cout<<"\nPlease mention the name to be modified : ";
+	 cin>>dname;
+	 fstream infile;
+	 infile.open("tata.Dat",ios::in|ios::out);
+	 infile.seekg(0);
+	 if(infile)
+	 {
+	 while(infile.read((char *)&std,sizeof(student)))
+	 {
+	    coutn++;
+	    char ans='y';
+	    if(stricmp(std.name,dname)==0)
+	    {
+	    k=1;
+	    while(ans=='y'||ans=='Y')
+	    {
+	    clrscr();
+	    cout<<"What do you want to
+modify\n1.Name\n2.Proffession\n3.Address ";
+	    cout<<"\n4.Country\n5.Telephone Number\n6.Fax Number\n7.Mobile";
+	    cout<<"\n8.E-mail\t";
+	    cin>>choice;
+	    switch(choice)
+	    {
+		  case 1:
+			cout<<"Name          : ";
+			cin>>std.name;
+			break;
+		  case 2:
+			cout<<"Proffession   : ";
+			cin>>std.proff;
+			break;
+		  case 3:
+			cout<<"Address       : ";
+			cin>>std.address;
+			break;
+		  case 4:
+			cout<<"Country       : ";
+			cin>>std.country;
+			break;
+		  case 5:
+			cout<<"Telephone     : ";
+			cin>>std.tel;
+			break;
+		  case 6:
+			cout<<"Fax           : ";
+			cin>>std.fax;
+			break;
+		  case 7:
+			cout<<"Mobile        : ";
+			cin>>std.mobile;
+			break;
+		  case 8:
+			cout<<"E-mail        : ";
+			cin>>std.email;
+			break;
+		  default:
+			cout<<"Wrong choice ";
+			break;
+	    }
+	    cout<<"\nAnything More to modify ";
+	    cin>>ans;
+         }
+	    infile.seekp((coutn-1)*sizeof(student));
+	    infile.write((char *)&std,sizeof(student));
+	    }
+	 }
+	 if(k!=1)
+	    cout<<"The name doesn't exist ";
+	 else
+	    cout<<"The name has been successfully modified ";
+	 }
+	 }
+	 else
+	    cout<<"access denied ";
+	    getch();
+}
+void data::delet()
+{
+	 char dname[30];
+	 int coutn=0;
+	 int k=0;
+	 if(checkpass()==1)
+	 {
+	 cout<<"\n\nPlease mention the name to be deleted : ";
+	 gets(dname);
+	 fstream infile;
+	 infile.open("tata.Dat",ios::in|ios::out);
+	 infile.seekg(0);
+	 if(infile)
+	 {
+	 while(infile.read((char *)&std,sizeof(student)))
+	 {
+	    coutn++;
+	    if(stricmp(std.name,dname)==0)
+	    {
+	    k=1;
+	    strcpy(std.name," ");
+	    strcpy(std.proff," ");
+	    strcpy(std.address," ");
+	    strcpy(std.country," ");
+	    strcpy(std.tel," ");
+	    strcpy(std.fax," ");
+	    strcpy(std.mobile," ");
+	    strcpy(std.email," ");
+	    infile.seekp((coutn-1)*sizeof(student));
+	    infile.write((char *)&std,sizeof(student));
+	    break;
+	    }
+	 }
+	 if(k!=1)
+	    cout<<"The name doesn't exist ";
+	 else
+	    cout<<"The name has been successfully deleted ";
+	 }
+	 }
+	 else
+	    cout<<"\n\nAccess Denied ";
+	 getch();
+}
+
+void data:: saveData()
+{
+	 ofstream outfile;
+	 outfile.open("tata.Dat",ios::app);
+	 outfile.write( (char *)&std,sizeof(student));
+}
+int data::readData()
+{
+	 count=0;
+	 ifstream infile;
+	 infile.open("tata.Dat",ios::app);
+	 if(infile)
+	 {
+	 while(infile.read((char *)&std,sizeof(student)))
+	 {
+	    if(strcmp(std.name," ")!=0)
+	    showData(std);
+	    count++;
+	 }
+	 }
+	 else
+	 cout<<"no file";
+	 return(count);
+}
+void data::emergency()
+{
+	 char emer[30];
+	 int j=0;
+	 cout<<"Please type the name to be searched: ";
+	 gets(emer);
+	 ifstream infile;
+	 infile.open("tata.Dat",ios::nocreate);
+	 while(infile.read((char *)&std,sizeof(student)))
+		{
+		if(stricmp(emer,std.proff)==0)
+		{
+		j=1;
+		showData(std);
+		}
+	 }
+	 if(j==0)
+	 cout<<"Sorry the name doesn't exist";
+	 getch();
+}
+void data::searchData()
+{
+	 j=0;
+	 cout<<"Please type the name to be searched: ";
+	 gets(sname);
+	 ifstream infile;
+	 infile.open("tata.Dat",ios::nocreate);
+	 while(infile.read((char *)&std,sizeof(student)))
+		{
+		if(stricmp(sname,std.name)==0)
+		{
+		j=1;
+		showData(std);
+		}
+	 }
+	 if(j==0)
+	 cout<<"Sorry the name doesn't exist";
+}
+void data::password()
+{
+	 char fre[20];
+	 int pd;
+	 clrscr();
+	 cout<<endl<<endl<<"Password ";
+	 strcpy(fre,takepass());
+	 pd=checkvalidity(fre);
+	 clrscr();
+	 if(pd==1)
+		 cout<<"This password already exist Please try for new password ";
+	 else
+	 {
+		 strcpy(pass,fre);
+		 ofstream passfile;
+		 passfile.open("pass.dat",ios::app);
+		 passfile.write(pass,sizeof(pass));
+		 cout<<"Passwords are sensitive do not lend it ";
+	 }
+}
+int data::checkvalidity(char fre[])
+{
+	 int idm=0;
+	 ifstream passfile;
+	 passfile.open("pass.dat",ios::app);
+	 while(passfile.read(pass,sizeof(pass)))
+	 {
+	    if(stricmp(fre,pass)==0)
+	    {
+		 idm=1;
+		 break;
+	    }
+	 }
+	 return idm;
+}
+
+
+void data::modpass()
+{
+  char d[20],npass[20];
+  clrscr();
+  int me=0,in=0;
+  cout<<endl<<endl<<"Old Password ";
+  strcpy(d,takepass());
+
+  fstream infile;
+  infile.open("pass.dat",ios::out|ios::in);
+  {
+	  while(infile.read(pass,sizeof(pass)))
+	  {
+		 me++;
+		 if(strcmp(d,pass)==0)
+		 {
+		    in=1;
+		    cout<<"\nOK the password exist ";
+		    getch();
+			clrscr();
+			cout<<endl<<endl<<"New password ";
+		    strcpy(pass,takepass());
+			infile.seekp((me-1)*sizeof(pass));
+	    infile.write(pass,sizeof(pass));
+		 }
+	  }
+  }
+  if(in==0)
+   cout<<"\nThe password doesn't exist ";
+  else
+   cout<<"\nThe password has been successfully modified ";
+   getch();
+}
+
+int data::checkpass()
+{
+	 char da[20];
+	 int z=0,to=0,u=0;
+	 clrscr();
+	 ifstream passfile;
+	 passfile.open("pass.dat",ios::app);
+	while(to<1&&z!=1)
+	 {
+	 to++;
+	 cout<<endl<<endl<<"Your password ";
+	 strcpy(da,takepass());
+	 passfile.seekg(0);
+	 while(passfile.read(pass,sizeof(pass)))
+	 {
+		clrscr();
+		if(strcmp(da,pass)==0)
+		 {
+		    z=1;
+		    break;
+
+		 }
+	 }
+	 }
+	 return z;
+}
+char* data::takepass()
+{
+	  char ma[20],pa[20];
+	 int q=0,row=30,col=3;
+	 int i=0;
+	 gotoxy(30,3);
+/*	 cout<<"                                    ";
+	 gotoxy*/
+		while((c=getch())!=ENTER)
+		{
+
+			if(c==BACK)
+			{
+			   gotoxy((row-1),col);
+			   cout<<" ";
+			   row--;
+			   i--;
+			}
+			else
+			{
+			   ma[i]=c;
+			   i++;
+			   gotoxy(row,col);
+			   cout<<"*";
+			   row++;
+			}
+		 }
+		 ma[i]='\0';
+		 strcpy(pa,ma);
+           clrscr();
+		 return pa;
+}
+void main()
+{
+	 int ch,i,k,a;
+	 char choice,sm[20];
+	 data s;
+      srand(time(NULL));
+	 a=1+(rand()%100);
+      textcolor(WHITE);
+	 while(1)
+	 {
+	    clrscr();
+	    cout<<"Your Choices";
+	    cout<<"\n1.Enter datas\n2.Read From File\n3.Search
+data\n4.ModifyData\n5.DeleteData\n6.View Emergency Contacts\t";
+	    cout<<"\n7.Create New Password\n8.Modify Password\n9.Exit\t";
+	    cin>>ch;
+	    switch(ch)
+	    {
+		 case 1:
+			 cout<<"How many datas do u want to feed " ;
+			 cin>>i;
+			 for(k=0;k<i;k++)
+			 {
+			    s.getData( );
+			    s.saveData();
+			 }
+		 break;
+		 case 2:
+			 s.readData();
+			 getch();
+		 break;
+		 case 3:
+			 s.searchData();
+			 getch();
+		 break;
+		 case 4:
+			 s.modify();
+			 break;
+		 case 5:
+			 s.delet();
+			 break;
+		 case 9:
+			 exit(0);
+		 case 7:
+			cout<<"Please mention Your institution ";
+			cin>>sm;
+			if((strcmpi(sm,"himalayan")==0)&&(a%4==0))
+			s.password();
+			else
+			if((strcmpi(sm,"himalayan")==0)&&(a%4!=0))
+			{
+			clrscr();
+
+			textcolor(LIGHTRED+BLINK);
+               gotoxy(25,10);
+			cprintf("SORRY THE SYSTEM IS BUSY ");
+			//			cout<<"\nSORRY THE SYSTEM IS BUSY ";
+			}
+			else
+			{
+			  clrscr();
+                 gotoxy(25,10);
+			  textcolor(LIGHTRED+BLINK);
+			  cprintf("YOU ARE NOT THE LEGAL PERSON ");
+//			  cout<<"\nYOU ARE NOT THE LEGAL PERSON ";
+			}
+			  getch();
+                 textcolor(WHITE);
+			break;
+		 case 8:
+			s.modpass();
+			break;
+		 case 6:
+			s.emergency();
+			break;
+		 default:
+			 cout<<"\nWrong Choice ";
+			 getch();
+	    }
+	 }
+getch();
+}
+

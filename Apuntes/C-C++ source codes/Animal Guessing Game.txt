@@ -1,0 +1,357 @@
+Program : Animal Guessing Game in C/C . 
+--------------------------------------------------------------------------------
+
+/********************************************************************
+
+			Animal Guessing Game
+(To convert to C, just change cout to printf and cin to scanf and change the library files)
+
+********************************************************************/
+//...Including necessary heading files...
+#include <iostream.h>    //...For the basic input output operations...
+#include <string.h>      //...For string manipulations................
+#include <conio.h>       //...For getch().............................
+#include <stdlib.h>      //...For exit()..............................
+#include <stdio.h>       //...For getchar()...........................
+#include <ctype.h>       //...For tolower()...........................
+#include <io.h>          //...For filelength() and fileno()...........
+
+//...The structure of the nodes of the tree...
+struct TreeNode{
+char info[50];
+TreeNode *left;
+TreeNode *right;
+};
+
+//...tree_node structure to store the tree nodes in a file...
+struct tree_node{
+char info[50];
+char left_info[50];
+char right_info[50];
+};
+tree_node new_node;
+
+//...The binary tree class...
+class Tree{
+private:
+	TreeNode* root;
+public:
+	Tree();//...Constructor...
+	~Tree();//...Destructor...
+	void InsertLeft(TreeNode *location, char question[]);//...Inserts a left child...
+	void InsertRight(TreeNode *location, char question[]);//...Inserts a right child...
+	TreeNode* GetRoot();//...Returns the root of the tree...
+	void SetRoot(TreeNode *newroot);//...Sets the new root to the list...
+	TreeNode* RetrieveItem(char *question);//...Retrieves a node whose info field is question...
+};
+
+Tree::Tree(){
+root=NULL;
+};
+
+void Destroy(TreeNode *tree){
+if(tree!=NULL){
+Destroy(tree->left);
+Destroy(tree->right);
+delete tree;
+}
+};
+
+Tree::~Tree(){
+Destroy(root);
+};
+
+void Tree::InsertLeft(TreeNode *location, char question[]){
+if(location->left==NULL){
+TreeNode *newnode;
+newnode=new TreeNode;
+strcpy(newnode->info,question);
+newnode->left=NULL;
+newnode->right=NULL;
+location->left=newnode;
+}
+else{
+TreeNode *newnode;
+newnode=new TreeNode;
+strcpy(newnode->info,question);
+newnode->left=location->left;
+location->left=newnode;
+}
+};
+
+void Tree::InsertRight(TreeNode *location, char question[]){
+if(location->right==NULL){
+TreeNode *newnode;
+newnode=new TreeNode;
+strcpy(newnode->info,question);
+newnode->left=NULL;
+newnode->right=NULL;
+location->right=newnode;
+}
+else{
+TreeNode *newnode;
+newnode=new TreeNode;
+strcpy(newnode->info,question);
+newnode->right=location->right;
+location->right=newnode;
+}
+};
+
+TreeNode* Tree::GetRoot(){
+return root;
+};
+
+void Tree::SetRoot(TreeNode *newroot){
+root=newroot;
+};
+
+TreeNode* Retrieve(TreeNode *tree, char* question){
+if(tree==NULL) return NULL;
+else if(strcmp(question, tree->info)!=0){Retrieve(tree->left, question); Retrieve(tree->right,question);}
+else return tree;
+};
+
+TreeNode* Tree::RetrieveItem(char* question){
+TreeNode *result=Retrieve(root,question);
+return result;
+};
+
+Tree Animals;
+
+int askcontinue(){
+char answer[4];
+do{
+cin>>answer;
+if(strcmp(answer,"YES")==0) return 1;
+else if(strcmp(answer, "NO")==0) return 0;
+else cout<<"\nERROR: Invalid answer!\nPlease enter \"YES\" or \"NO\"...\nContinue?   ";
+}while(strcmp(answer, "YES")!=0 && strcmp(answer,"NO")!=0);
+return 1;
+};
+
+char* Arrange(char array[],int type){
+//...It just changes all the characters except the first one to lower case...
+if(type==0){
+for(int i=1;array[i]!='\0';i++)array[i]=tolower(array[i]);
+}
+//...It arranges array so that it looks like, "Is it <array>?"...
+else if(type==1){
+char tempArray[50];
+strcpy(tempArray,"Is it ");
+strcat(tempArray,array);
+strcat(tempArray,"?");
+return tempArray;
+}
+//...It converts all the characters of the array to lower case...
+else if(type==3){
+for(int i=0;array[i]!='\0';i++) array[i]=tolower(array[i]);
+}
+//...It converts "Is it <array>? to <array>...
+else if(type==4){
+int k=0;
+char tempArray[50];
+for(int i=6; array[i]!='?';i++)tempArray[k++]=array[i];
+tempArray[k]='\0';
+strcpy(tempArray,Arrange(tempArray,3));
+return tempArray;
+}
+return array;
+}
+
+void ReadFile(){
+int i=0;
+FILE *in;
+in=fopen("animals.txt","rb");
+if(!in){cout<<"\nERROR: Can not open output file...\nPress any key to restart..."; getch(); exit(1);}
+while(fread(&new_node,sizeof(new_node),1,in)==1){
+i++;
+if(i==1){
+//...Creating the root...
+TreeNode * location=new TreeNode;
+strcpy(location->info,new_node.info);
+Animals.InsertLeft(location,new_node.left_info);
+Animals.InsertRight(location,new_node.right_info);
+Animals.SetRoot(location);
+}
+else{
+TreeNode *location=Animals.RetrieveItem(new_node.info);
+Animals.InsertLeft(location, new_node.left_info);
+Animals.InsertRight(location, new_node.right_info);
+}
+}
+fclose(in);
+cout<<"File is read successfully!\nPress any key to continue..."; getch();
+}
+
+void Continue(){
+clrscr();
+FILE *fp;
+FILE *fp2;
+fp=fopen("animals.txt","rb+");
+if(!fp){cout<<"\nERROR: Can not open output file...\nPress any key to restart..."; getch(); return;}
+fp2=fopen("animalst.txt","wb");
+if(!fp2){cout<<"\nERROR: Can not open output file...\nPress any key to restart..."; getch(); return;}
+int i=0,yes=0;
+char answer[4];
+char newquestion[50];
+char newanimal[50];
+char newanimalT[50];
+char locationParentInfoT[50];
+TreeNode *newnode1=new TreeNode;
+TreeNode *newnode2=new TreeNode;
+TreeNode *locationParent=new TreeNode;
+TreeNode *locationParentParent=new TreeNode;
+TreeNode *location=new TreeNode;
+TreeNode *tempRoot=new TreeNode;
+location=Animals.GetRoot();
+locationParent=location;
+locationParentParent=location;
+tempRoot=location;
+cout<<"\nThink of an animal an I will guess it.\n";
+while(location!=NULL){
+cout<<location->info<<"   ";
+do{
+cin>>answer;
+i++;
+if(strcmp(answer, "YES")==0){yes++;locationParentParent=locationParent; locationParent=location; location=location->left;}
+else if(strcmp(answer,"NO")==0){locationParentParent=locationParent;locationParent=location; location=location->right;}
+else cout<<"\nERROR: Invalid answer!\nPlease enter \"YES\" or \"NO\"...    ";
+}while(strcmp(answer, "YES")!=0 && strcmp(answer, "NO")!=0);
+//...If there are no more nodes...
+//...If the computer guesses true...
+if(location==NULL && strcmp(answer,"YES")==0){
+cout<<"\nI win! Continue?   ";
+if(askcontinue()) Continue();
+else cout<<"\n\nGood Bye!...";}
+//...If computer guesses false...
+else if(location==NULL && strcmp(answer,"NO")==0){
+cout<<"I give up. What is it?   ";
+cin>>newanimalT;
+strcpy(newanimal,Arrange(newanimalT,3));
+strcpy(newanimal,Arrange(newanimalT,1));
+strcpy(newnode2->info, newanimal);
+newnode2->left=NULL;
+newnode2->right=NULL;
+strcpy(newanimalT, Arrange(newanimalT,3));
+strcpy(locationParentInfoT,Arrange(locationParent->info,4));
+cout<<"Please type a question whose answer is yes for an "<<newanimalT<<" and no for a "<<locationParentInfoT<<"\n";
+i=0;
+while((newquestion[i++]=getchar())!='\n');
+newquestion[i-1]='\0';
+strcpy(newquestion,Arrange(newquestion,0));
+strcpy(newnode1->info, newquestion);
+if(yes){
+newnode1->left=newnode2;
+newnode1->right=locationParent;
+locationParentParent->left=newnode1;
+//...Preparing the new node to be written to the file...
+strcpy(new_node.info,newnode1->info);
+strcpy(new_node.left_info,newnode1->left->info);
+strcpy(new_node.right_info,newnode1->right->info);
+//...Find the node whose child is the new node...
+fseek(fp,0L, SEEK_SET);
+tree_node new_node_t;
+while(!feof(fp) && fread(&new_node_t, sizeof(new_node_t), 1, fp)==1){
+fwrite(&new_node_t, sizeof(new_node_t),1,fp2);
+if(strcmp(new_node_t.info, locationParentParent->info)==0) break;}
+fwrite(&new_node, sizeof(new_node),1,fp2);
+while(!feof(fp) && fread(&new_node_t, sizeof(new_node_t), 1, fp)==1)fwrite(&new_node_t, sizeof(new_node_t),1,fp2);
+fclose(fp); fclose(fp2);
+remove("animals.txt"); if(rename("animalst.txt","animals.txt")!=0) {cout<<"ERROR: Can not rename \"animalst.txt\" as \"animals.txt\"!\nError message is:\n\n"; perror("rename"); cout<<"\n\nPress any key to exit..."; getch(); exit(1);}
+//...Up to now the new node is inserted right after its parent...
+//...Changing the info of the locationParentParent...
+fp=fopen("animals.txt","rb");
+fseek(fp, 0L, SEEK_SET);
+fp2=fopen("animalst.txt","wb");
+while(1){
+fread(&new_node, sizeof(new_node),1,fp);
+if(strcmp(new_node.info, locationParentParent->info)==0) break;
+fwrite(&new_node,sizeof(new_node),1,fp2);}
+strcpy(new_node.left_info, locationParentParent->left->info);
+fwrite(&new_node,sizeof(new_node),1,fp2);
+while(fread(&new_node,sizeof(new_node),1,fp)==1)
+fwrite(&new_node,sizeof(new_node),1,fp2);
+fclose(fp); fclose(fp2);
+remove("animals.txt"); if(rename("animalst.txt","animals.txt")!=0) {cout<<"ERROR: Can not rename \"animalst.txt\" as \"animals.txt\"!\nError message is:\n\n"; perror("rename"); cout<<"\n\nPress any key to exit..."; getch(); exit(1);}
+}
+else{
+newnode1->left=newnode2;
+newnode1->right=locationParent;
+locationParentParent->right=newnode1;
+//...Preparing the new node to be written to the file...
+strcpy(new_node.info,newnode1->info);
+strcpy(new_node.left_info,newnode1->left->info);
+strcpy(new_node.right_info,newnode1->right->info);
+//...Find the node whose child is the new node...
+fseek(fp,0L, SEEK_SET);
+tree_node new_node_t;
+while(!feof(fp) && fread(&new_node_t, sizeof(new_node_t), 1, fp)==1){
+fwrite(&new_node_t, sizeof(new_node_t),1,fp2);
+if(strcmp(new_node_t.info, locationParentParent->info)==0) break;}
+fwrite(&new_node, sizeof(new_node),1,fp2);
+while(!feof(fp) && fread(&new_node_t, sizeof(new_node_t), 1, fp)==1)fwrite(&new_node_t, sizeof(new_node_t),1,fp2);
+fclose(fp); fclose(fp2);
+remove("animals.txt"); if(rename("animalst.txt","animals.txt")!=0) {cout<<"ERROR: Can not rename \"animalst.txt\" as \"animals.txt\"!\nError message is:\n\n"; perror("rename"); cout<<"\n\nPress any key to exit..."; getch(); exit(1);}
+//...Up to now the new node is inserted right after its parent...
+//...Changing the info of the locationParentParent...
+fp=fopen("animals.txt","rb");
+fseek(fp, 0L, SEEK_SET);
+fp2=fopen("animalst.txt","wb");
+while(1){
+fread(&new_node, sizeof(new_node),1,fp);
+if(strcmp(new_node.info, locationParentParent->info)==0) break;
+fwrite(&new_node,sizeof(new_node),1,fp2);}
+strcpy(new_node.right_info, locationParentParent->right->info);
+fwrite(&new_node,sizeof(new_node),1,fp2);
+while(fread(&new_node,sizeof(new_node),1,fp)==1)
+fwrite(&new_node,sizeof(new_node),1,fp2);
+fclose(fp); fclose(fp2);
+remove("animals.txt"); if(rename("animalst.txt","animals.txt")!=0) {cout<<"ERROR: Can not rename \"animalst.txt\" as \"animals.txt!\nError message is:\n\n"; perror("rename"); cout<<"\n\nPress any key to exit..."; getch(); exit(1);}
+}
+Animals.SetRoot(tempRoot);
+cout<<"\nContinue?   ";
+if(askcontinue()) Continue();
+else cout<<"\n\nGood Bye...";
+}
+}
+if((fp=fopen("animalst.txt","rb"))!=0){
+fclose(fp);
+remove("animalst.txt");}
+};
+
+void BeginNew(){
+FILE *fp=fopen("animals.txt", "wb");
+if(!fp){cout<<"\nERROR: Can not open output file...\nPress any key to restart..."; getch(); return;}
+//...Making the necessary initializations...
+TreeNode *newroot;
+newroot=new TreeNode;
+strcpy(newroot->info,"Does it have legs?");
+newroot->left=NULL;
+newroot->right=NULL;
+Animals.SetRoot(newroot);
+Animals.InsertLeft(Animals.GetRoot(),"Is it cat?");
+Animals.InsertRight(Animals.GetRoot(),"Is it snake?");
+strcpy(new_node.info, "Does it have legs?");
+strcpy(new_node.left_info, "Is it cat?");
+strcpy(new_node.right_info, "Is it snake?");
+fwrite(&new_node, sizeof(new_node),1,fp);
+fclose(fp);
+cout<<"New tree is created!\nPress any key to continue..."; getch();
+};
+
+int main(){
+//...Determining whether there is stored tree or not...
+cout<<"\n+--------------------+";
+cout<<"\n|Animal Guessing Game|";
+cout<<"\n|---------By---------|";
+cout<<"\n|--Vyom Technologies-|";
+cout<<"\n+--------------------+";
+cout<<"\n\n\nPress any key to continue..."; getch(); clrscr();
+FILE *in=fopen("animals.txt", "rb");
+//...If there is a previously saved file read it and continue...
+if(in){fclose(in); ReadFile(); Continue();}
+//...If there is not a previously saved file initialize a new tree and save it when function terminates...
+else  {fclose(in); BeginNew(); Continue();}
+return 0;
+}
+

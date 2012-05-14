@@ -1,0 +1,134 @@
+EJERCICIOS PROPUESTOS, CAPÍTULO 3
+1o)
+Realizar un programa que pide una cadena por teclado (el nombre
+y apellidos) y añada la cadena "Sr. D." mostrando el resultado por pantalla.
+2o)
+Hacer un programa que pide el nombre y apellidos y lo muestre al
+revés, repitiendo la operación hasta que se teclea "N".
+3o)
+¿ Qué está mal en este fragmento ?:
+#include <stdio.h>
+main()
+{
+int i, contador[10] ;
+for(i = 0 ; i < 100 ; i++) ;
+{
+printf("Introduzca un número: ") ;
+scanf("%d", &contador[i]) ;
+}
+}
+*/
+/* No implementar este programa */
+4o)
+Escribir un programa que lea diez números introducidos por el
+usuario y que informe sobre si alguno coincide.
+5o)
+Realizar un programa que permita introducir hasta 100 números y
+después los ordene. Para ello utilizar el método de ordenación de la burbuja.
+El algoritmo de ordenación de la burbuja es (de menor a mayor):
+- se compara cada miembro de la tabla con el inmediatamente
+posterior, si el siguiente es menor los números se invierten de posición.
+- debe repetirse la comparación de todos los números hasta que se
+recorra completamente la tabla sin ningún cambio.
+6o)
+¿ Qué está mal en este programa ?
+#include <string.h>
+#include <stdio.h>
+main()
+{
+char cadena[5] ;
+strcpy(cadena, "esto es una prueba") ;
+printf(cadena) ;
+}
+7o)
+Escribir un programa que introduzca cadenas repetidamente. Cada
+vez que se introduzca una cadena, tiene que concatenarse con una segunda
+cadena llamada bigstr. Añadir caracteres de nueva línea al final de cada
+cadena y mostrar bigstr (que contendrá un registro de todas las cadenas
+introducidas). También tendrá que detenerse si la siguiente concatenación va
+a sobrepasar el tamaño de bigstr.
+Cap.3-15
+Capítulo 3: Tablas y cadenas
+Programación en C
+8o)
+Crear un programa que guarde en tabla de 4 * 5 casillas los
+productos de los índices y después muestre la tabla en formato de filas y
+columnas.
+9o)
+Diseñar un programa que defina una tabla de tres dimensiones de
+3 * 3 * 3, y cargue en él los números del 1 al 127.
+10o) Modificar el programa anterior para que muestre la suma de todos
+sus elementos.
+11o)
+¿ Son correctos estos fragmentos de programas ?.
+A)
+int balance[] = 10, 0, 122, 23, 100, 0 ;
+B)
+#include <stdio.h>
+#include <string.h>
+main()
+{
+char nombre[] = "Andreu" ;
+strcpy(nombre, "Andreu Martín") ;
+}
+12o) Crear un programa que inicialice una tabla de 10 x 3 de modo que
+el primer elemento de cada fila contenga un número, el segundo elemento su
+cuadrado y el tercer elemento contenga un cubo. Debe empezarse con uno y
+terminar con 10. Por ejemplo, las primeras filas serían así:
+1, 1, 1,
+2, 4, 8,
+3, 9, 27,
+...
+Después, que pida el usuario un cubo, debe buscarse ese valor en la
+tabla, e informa de cuál es la raíz del cubo y el cuál es el cuadrado de la
+raíz.
+13o) Escribir un programa que cree una tabla de cadenas que contenga
+las palabras en inglés para los números 0 al 9. Utilizando esta tabla, permita
+al usuario introducir un dígito y que el programa muestre la palabra
+equivalente.
+14o) Construir un programa que realiza la traducción de español a
+inglés con un número de términos indicados por el programador (por ejemplo
+10). Para ello inicializar una tabla de cadenas de tres dimensiones:
+- número de términos []
+- Idiomas [2] (Castellano , Inglés)
+- tamaño máximo de las cadenas de caracteres [40]
+15o) Realizar un programa que imprima el contenido de la siguiente
+tabla de cadenas, carácter a carácter:
+char texto[][40] =
+{
+"Buscar la belleza"
+"es la única razón que"
+"merece la pena "
+"en este"
+"asqueroso Mundo"
+} ;
+,
+,
+,
+,
+,
+Cap.3-16
+Capítulo 3: Tablas y cadenas
+Programación en C
+16o) En estadística la MODA de un grupo de números es aquel que aparece
+con más frecuencia. Por ejemplo, dada la lista 1, 2, 3, 4, 5, 6, 7, 5, 4, 6,
+9, 4 la moda es 4, ya que aparece tres veces. Plantear programa que permita
+al usuario introducir una lista de 20 números y después busque y muestre la
+moda.
+17o) Escribir un programa que permita al usuario introducir cadenas.
+Si la cadena es menor de 80 caracteres, el programa debe rellenarla con
+puntos. Imprimir (por pantalla) para verificar que se ha alargado
+correctamente.
+18o) Escribir un programa que cuente el número de espacios, comas, y
+puntos en una cadena. Utilizar switch para clasificar los caracteres.
+19o) Nos piden desarrollar un programa que ejecute una versión
+informatizada del ahorcado. En el juego del ahorcado, se muestra la longitud
+de una palabra mágica (utilizando las líneas de subrayado) y se trata de
+adivinar de qué palabra se trata, introduciendo letras. Cada vez que se
+introduce una letra, se examina la palabra mágica para verificar si contiene
+esa letra. Si lo hace, se muestra la letra. Guardar la cuenta del número de
+letras introducidas para completar la palabra. Por razones de sencillez, un
+jugador gana cuando completa la palabra mágica utilizando 15 o menos
+suposiciones. Para este ejercicio utilizar la palabra mágica "concatenación".
+20o) Modificar el programa anterior para permitir introducir por el
+usuario la palabra secreta.
