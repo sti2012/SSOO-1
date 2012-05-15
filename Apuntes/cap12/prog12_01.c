@@ -24,7 +24,7 @@ int main()
 	  w+ --> Crea un archivo para escribidleer (si ya existe se pierden los datos).
 	  a+ --> Abre el archivo para modificar (exribidleer) al final. Si no existe es como w+.
    */
-   if (desc == NULL)
+   if (desc == NULL) // si el puntero no encuentra memoria para asignar (null)
    {
 	  printf("Error, no se puede crear el archivo\n");
    }
