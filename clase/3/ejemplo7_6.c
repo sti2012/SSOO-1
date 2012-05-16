@@ -5,7 +5,7 @@
 int main()
 {
     enum diasemana {lunes, martes, miercoles, jueves, viernes, sabado, domingo};
-    int dia ;
+    int dia;
 
     for (dia = lunes; dia <= domingo; dia++ ){
         if (dia != sabado && dia != domingo ){
