@@ -6,14 +6,23 @@
 
 int main()
 {
-	int ini= INICIO +1;
+	int inicio = INICIO;
+	int fin = FIN;
+	for (; inicio < fin; ++inicio)
+	{
+		printf("%c\n", inicio);
+
+	}
+
+	/*
+	int ini = INICIO +1;
 	int fin;
 	printf("%d\n", ini);
-/*	sprintf(ini, "%x", INICIO);
+	sprintf(ini, "%x", INICIO);
 	sprintf(fin, "%x", FIN);
-*/
-
-	printf("%c\n", );
+	printf("%c\n", ini);
 	printf("%d\n", '\u04FF');
+	*/
+
 	return 0;
 }
