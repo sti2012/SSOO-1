@@ -1,159 +1,111 @@
-EJERCICIOS PROPUESTOS, CAPÍTULO 2
-1o)
-¿Qué imprimirá el siguiente programa?:
-#include <stdio.h>
-main()
-{
-int i = 0 ;
-while (i < 4)
-{
-switch(i++)
-{
-case 0 :
-case 1 :
-case 2 :
-case 3 :
-default:
-}
-printf("\n") ;
-}
-printf
-printf
-printf
-printf
-printf
-("¿Cuál") ;
-(" es el") ;
-(" resultado") ;
-(" del") ;
-(" ejercicio") ;
-}
-2o)
-¿Qué imprimirá el programa si modificamos el cuerpo del "case 2"
-de la siguiente forma?:
-case 2: printf(" resultado") ;
-break ;
-3o)
-¿Qué imprimirá el siguiente programa?:
-#include <stdio.h>
-#define MENSAJE "¿DOMINO EL LENGUAJE C?"
-main()
-{
-int i = 0 ;
-while(i < 5)
-printf(%s\n", MENSAJE) ;
-i++;
-}
-4o)
-¿Qué imprimirá el siguiente programa?:
-#include <stdio.h>
-#define DIBUJO "*"
-main()
-{
-int i, j, k = 4 ;
-for(i = 1; i <= 4 ; i++)
-{
-for(j = 1; j < = k ; j++)
-printf(DIBUJO);
-k-- ;
-printf("\n") ;
-}
-}
-Cap.2-20
-Capítulo 2: Sentencias de control en C
-5o)
-Programación en C
-Crear un programa que indique si un no introducido es múltiplo de
-3.
-6o)
-Utilizando una función que genere números aleatoriamente (random()
-o randomize() -stdlib.h-) diseñar un programa que solicite un no (0 - 100)
-al usuario y que devuelva un mensaje de acierto si dicho no coincide con el
-no aleatorio obtenido anteriormente.
-7o)
-Implementar un algoritmo que primero solicite el margen de valores
-(v_max y v_min) para que posteriormente al introducir el usuario un no, el
-programa indique si está o no dentro de los límites marcados previamente.
-Utilizar el operador ternario "?".
-8o)
-Realizar un programa que solicite un carácter y que devuelva el
-tipo de carácter de que se trata:
--
--
--
--
-9o)
-Numérico
-Alfabético (minúsculas)
-Alfabético (mayúsculas)
-otro
-Crear un programa que muestre por pantalla el siguiente mensaje:
+EJERCICIOS PROPUESTOS, CAPÍTULO 2 Vicente Escudero.
+
+1) ¿Qué imprimirá el siguiente programa?:
+	#include <stdio.h>
+	main()
+	{
+	int i = 0 ;
+	while (i < 4)
+	{
+	switch(i++)
+	{
+	case 0 : printf("¿Cuál");
+	case 1 : printf(" es el");
+	case 2 : printf(" resultado");
+	case 3 : printf(" del");
+	default: printf(" ejercicio");
+	}
+	printf("\n") ;
+	}
+	}
+
+2) ¿Qué imprimirá el programa si modificamos el cuerpo del "case 2" de la siguiente forma?:
+case 2: printf(" resultado");
+break;
+
+3) ¿Qué imprimirá el siguiente programa?:
+	#include <stdio.h>
+	#define MENSAJE "¿DOMINO EL LENGUAJE C?"
+	main()
+	{
+	int i = 0 ;
+	while(i < 5)
+	printf(%s\n", MENSAJE) ;
+	i++;
+	}
+
+4) ¿Qué imprimirá el siguiente programa?:
+	#include <stdio.h>
+	#define DIBUJO "*"
+	main()
+	{
+	int i, j, k = 4 ;
+	for(i = 1; i <= 4 ; i++)
+	{
+	for(j = 1; j < = k ; j++)
+	printf(DIBUJO);
+	k-- ;
+	printf("\n") ;
+	}
+	}
+
+5) Crear un programa que indique si un no introducido es múltiplo de 3.
+
+6) Utilizando una función que genere números aleatoriamente (random() o randomize() -stdlib.h-) diseñar un programa que solicite un no (0 - 100) al usuario y que devuelva un mensaje de acierto si dicho no coincide con el no aleatorio obtenido anteriormente.
+
+7) Implementar un algoritmo que primero solicite el margen de valores (v_max y v_min) para que posteriormente al introducir el usuario un no, el programa indique si está o no dentro de los límites marcados previamente. Utilizar el operador ternario "?".
+
+8) Realizar un programa que solicite un carácter y que devuelva el tipo de carácter de que se trata:
+- Numérico
+- Alfabético (minúsculas)
+- Alfabético (mayúsculas)
+- otro
+
+9) Crear un programa que muestre por pantalla el siguiente mensaje:
 ---------- Menú de diagnóstico ----------
-A:
-B:
-C:
-D:
-Test
-Test
-Test
-Test
-del sistema
-de video
-de discos duros
-de teclado
+A: Test del sistema
+B: Test de video
+C: Test de discos duros
+D: Test de teclado
+
 Introduzca letra para seleccionar el test =>
-Una vez indicada la opción se devolverá un mensaje que indique la opción
-seleccionada. Si la tecla pulsada no corresponde con ninguna de las cuatro
-opciones debe aparecer el texto "No eligió ningún test".
-Nota: la función toupper() -ctype.h- convierta a mayúscula el carácter
-alfabético pulsado.
-10o) Diseñar un algoritmo que fuerza a permanecer en un bucle hasta que
-el usuario pulse una tecla que corresponda a una letra minúscula.
-11o) Crear un programa (utilizando el bucle WHILE) que permita
-convertir un número en base decimal a cualquier otra base (entre 2 y 9).
+
+Una vez indicada la opción se devolverá un mensaje que indique la opción seleccionada. Si la tecla pulsada no corresponde con ninguna de las cuatro opciones debe aparecer el texto "No eligió ningún test". 
+Nota: la función toupper() -ctype.h- convierta a mayúscula el carácter alfabético pulsado.
+
+10) Diseñar un algoritmo que fuerza a permanecer en un bucle hasta que el usuario pulse una tecla que corresponda a una letra minúscula.
+
+11) Crear un programa (utilizando el bucle WHILE) que permita convertir un número en base decimal a cualquier otra base (entre 2 y 9).
 Debe pedirse la base destino y el no a convertir.
-12o) Modificar el ejercicio número 9 para que repita la presentación
-del mensaje mientras no se pulse una de las opciones deseadas.
-13o) Utilizando bucles de tipo FOR crear un programa que genere una
-ventana con los márgenes asignados por el usuario.
-Deben indicarse los siguientes datos: margen superior izquierdo de la
-ventana y no de columnas y filas a partir de dicho punto.
-Para el desarrollo de este programa pueden utilizarse las siguientes
-funciones de la librería conio.h:
-gotoxy()
-.- sitúa el cursor en un punto determinado (columna, fila)
-wherex()
-.- toma el valor de la columna actual
-wherey()
-.- toma el valor de la fila actual
-textbackground() .- color del fondo
-textcolor()
-.- color de línea
-cprintf()
-.- presenta por pantalla un texto con el color de salida
-previamente fijado
-Cap.2-21
-Capítulo 2: Sentencias de control en C
-Programación en C
+
+12) Modificar el ejercicio número 9 para que repita la presentación del mensaje mientras no se pulse una de las opciones deseadas.
+
+13) Utilizando bucles de tipo FOR crear un programa que genere una ventana con los márgenes asignados por el usuario.
+Deben indicarse los siguientes datos: margen superior izquierdo de la ventana y no de columnas y filas a partir de dicho punto.
+Para el desarrollo de este programa pueden utilizarse las siguientes funciones de la librería conio.h:
+gotoxy() - sitúa el cursor en un punto determinado (columna, fila)
+wherex() - toma el valor de la columna actual
+wherey() - toma el valor de la fila actual
+textbackground() - color del fondo
+textcolor() - color de línea
+cprintf() - presenta por pantalla un texto con el color de salida previamente fijado
 Los colores posibles son:
-BLACK, BLUE, GREEN, CYAN, RED, MAGENTA, BROWN, LIGHTGRAY, DARKGRAY, LIGHTBLUE
-LIGHTGREEN, LIGHTCYAN, LIGHTRED, LIGHTMAGENTA, YELLOW y WHITE.
+BLACK, BLUE, GREEN, CYAN, RED, MAGENTA, BROWN, LIGHTGRAY, DARKGRAY, LIGHTBLUE LIGHTGREEN, LIGHTCYAN, LIGHTRED, LIGHTMAGENTA, YELLOW y WHITE.
 lowvideo()
 normvideo()
 highvideo()
 BLINK .- parpadeo.
-14o)
-Realizar un programa que escriba la tabla de multiplicar del 1 al
-9.
-15o) Crear un programa que realice la tabla de multiplicar de un no
-introducido por teclado (solamente válido para números del 1 al 10).
-16o) Desarrollar un algoritmo que permita calcular el máximo común
-divisor de dos números.
-17o) Diseñar un programa que lee números y muestra su suma y la media,
-hasta que se introduzca el 0.
-18o) Utilizando la sentencia CASE realiza un programa que simula una
-calculadora simple.
-19o) Crear un programa que imprima por pantalla la serie de Fibonacci
-(0 1 1 2 3 5 ...), hasta un límite pedido al usuario.
-20o) Diseñar un programa que realice una tabla de cuadrados y cubos de
-los n primeros números.
+
+14) Realizar un programa que escriba la tabla de multiplicar del 1 al 9.
+
+15) Crear un programa que realice la tabla de multiplicar de un no introducido por teclado (solamente válido para números del 1 al 10).
+
+16) Desarrollar un algoritmo que permita calcular el máximo común divisor de dos números.
+
+17) Diseñar un programa que lee números y muestra su suma y la media, hasta que se introduzca el 0.
+
+18) Utilizando la sentencia CASE realiza un programa que simula una calculadora simple.
+
+19) Crear un programa que imprima por pantalla la serie de Fibonacci (0 1 1 2 3 5 ...), hasta un límite pedido al usuario.
+
+20) Diseñar un programa que realice una tabla de cuadrados y cubos de los n primeros números.
